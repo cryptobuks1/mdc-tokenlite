@@ -100,7 +100,7 @@
                         @endif
                         <li><a href="{{ route('user.transactions') }}"><em class="ikon ikon-transactions"></em> {{__('Transactions')}}</a></li>
                         <li><a href="{{ route('user.account') }}"><em class="ikon ikon-user"></em> {{__('Profile')}}</a></li>
-                        <li><a href="{{ route('user.referrals') }}"><em class="ikon ikon-user"></em> {{__('My Donwlines')}}</a></li>
+                        <li><a href="{{ route('user.referrals') }}"><em class="ikon ikon-user"></em> {{__('My Downlines')}}</a></li>
                         @if(gws('user_mytoken_page') == 1)
                         <li><a href="{{ route('user.token.balance') }}"><em class="ikon ikon-my-token"></em> {{ __('My Token') }}</a></li>
                         @endif
