@@ -43,7 +43,7 @@
    .popup-content p {
     color : #101a2d !important;
    }
-   #user_transaction,#card-admin{
+   #user_transaction,#crad-admin{
        background-color : #ffffff;
       
    }
