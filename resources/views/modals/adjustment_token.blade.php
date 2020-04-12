@@ -11,19 +11,19 @@
                     <input class="input-bordered" type="hidden" name="req_type" value="approved">
                     <div class="row">
                         <div class="col-12">
-                             <p>User requested to purchase <strong>{{$trnx->total_tokens.' '.token_symbol()}}</strong> Token and payment amount <strong>{{$trnx->amount.' '.strtoupper($trnx->currency)}}</strong>. Please update received amount accrodingly if you received less or more than payment amount.</p>
+                             <p style="color:#101a2d !important;">User requested to purchase <strong>{{$trnx->total_tokens.' '.token_symbol()}}</strong> Token and payment amount <strong>{{$trnx->amount.' '.strtoupper($trnx->currency)}}</strong>. Please update received amount accrodingly if you received less or more than payment amount.</p>
                              <div class="gaps-1-5x"></div>  
                          </div>
                          <div class="col-sm-6">
-                            <div class="input-item input-with-label w-sm-60">
-                                <label class="input-item-label">Received Amount <strong class="h5 text- text-info text-uppercase">({{$trnx->currency}})</strong></label>
-                                <input class="input-bordered" required="" id="receive_amount" type="number" value="{{ $trnx->amount }}" name="receive_amount">
+                            <div class="input-item input-with-label w-sm-60" >
+                                <label class="input-item-label" style="color:#101a2d !important;">Received Amount <strong class="h5 text- text-info text-uppercase">({{$trnx->currency}})</strong></label>
+                                <input class="input-bordered" required="" id="receive_amount" type="number" value="{{ $trnx->amount }}" name="receive_amount" style="color:#101a2d !important;">
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="input-item input-with-label w-sm-60">
-                                <label class="input-item-label">Token to adjust</label>
-                                <input class="input-bordered" type="number" name="total_tokens" id="total_tokens" value="{{ $trnx->total_tokens }}" readonly>
+                                <label class="input-item-label" style="color:#101a2d !important;">Token to adjust</label>
+                                <input class="input-bordered" type="number" name="total_tokens" id="total_tokens" value="{{ $trnx->total_tokens }}" readonly style="color:#101a2d !important;">
                             </div>
                         </div>
                         <div class="col-12">

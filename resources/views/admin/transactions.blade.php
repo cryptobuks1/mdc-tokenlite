@@ -1,15 +1,19 @@
 @extends('layouts.admin')
 @section('title', ucfirst($is_page).' Transactions')
-
+<style>
+    p {
+        color:#101a2d !important;
+    }
+    </style>
 @section('content')
 <div class="page-content">
     <div class="container">
         @include('layouts.messages')
         @include('vendor.notice')
-        <div class="card content-area content-area-mh">
+        <div class="card content-area content-area-mh" style="background: #fff;">
             <div class="card-innr">
                 <div class="card-head has-aside">
-                    <h4 class="card-title">{{ ucfirst($is_page) }} Transactions</h4>
+                    <h4 class="card-title" style="color:#101a2d !important;">{{ ucfirst($is_page) }} Transactions</h4>
                     <div class="card-opt">
                         <ul class="btn-grp btn-grp-block guttar-20px">
                             <li>
@@ -35,7 +39,7 @@
                             <form action="{{ route('admin.transactions') }}" method="GET" autocomplete="off">
                                 <div class="input-wrap">
                                     <span class="input-icon input-icon-left"><em class="ti ti-search"></em></span>
-                                    <input type="search" class="input-solid input-transparent" placeholder="Tranx ID to quick search" value="{{ request()->get('s', '') }}" name="s">
+                                    <input type="search" class="input-solid input-transparent" placeholder="Tranx ID to quick search" value="{{ request()->get('s', '') }}" name="s" style="color:#758698 !important;">
                                 </div>
                             </form>
                         </div>
@@ -444,13 +448,13 @@
             <a href="#" class="modal-close" data-dismiss="modal" aria-label="Close"><em class="ti ti-close"></em></a>
             <div class="popup-body popup-body-md">
                 <h3 class="popup-title">Manually Add Tokens</h3>
-                <form action="{{ route('admin.ajax.transactions.add') }}" method="POST" class="validate-modern" id="add_token" autocomplete="off">
+                <form action="{{ route('admin.ajax.transactions.add') }}" method="POST" class="validate-modern" id="add_token" autocomplete="off" >
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="input-item input-with-label">
-                                <label class="input-item-label">Tranx Type</label>
+                                <label class="input-item-label" style="color:#758698 !important;">Tranx Type</label>
                                 <div class="input-wrap">
-                                    <select name="type" class="select select-block select-bordered" required>
+                                    <select name="type" class="select select-block select-bordered" required style="color:#758698 !important;">
                                         <option value="purchase">Purchase</option>
                                         <option value="bonus">Bonus</option>
                                     </select>
@@ -459,9 +463,9 @@
                         </div>
                         <div class="col-sm-6">
                             <div class="input-item input-with-label w-sm-60">
-                                <label class="input-item-label">Tranx Date</label>
+                                <label class="input-item-label" style="color:#758698 !important;">Tranx Date</label>
                                 <div class="input-wrap">
-                                    <input class="input-bordered date-picker" required="" type="text" name="tnx_date" value="{{ date('m/d/Y') }}">
+                                    <input class="input-bordered date-picker" required="" type="text" name="tnx_date" value="{{ date('m/d/Y') }}" style="color:#758698 !important;">
                                     <span class="input-icon input-icon-right date-picker-icon"><em class="ti ti-calendar"></em></span>
                                 </div>
                             </div>
@@ -470,24 +474,24 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="input-item input-with-label">
-                                <label class="input-item-label">Token Added To</label>
+                                <label class="input-item-label" style="color:#758698 !important;">Token Added To</label>
                                 <div class="input-wrap">
-                                    <select name="user" required="" class="select-block select-bordered" data-dd-class="search-on">
+                                    <select name="user" required="" class="select-block select-bordered" data-dd-class="search-on" style="color:#758698 !important;">
                                         @forelse($users as $user)
                                         <option value="{{ $user->id }}">{{ $user->name }}</option>
                                         @empty
                                         <option value="">No user found</option>
                                         @endif
                                     </select>
-                                    <span class="input-note">Select account to add token.</span>
+                                    <span class="input-note" >Select account to add token.</span>
                                 </div>
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="input-item input-with-label">
-                                <label class="input-item-label">Token for Stage</label>
+                                <label class="input-item-label" style="color:#758698 !important;">Token for Stage</label>
                                 <div class="input-wrap">
-                                    <select name="stage" class="select select-block select-bordered" required>
+                                    <select name="stage" class="select select-block select-bordered" required style="color:#758698 !important;">
                                         @forelse($stages as $stage)
                                         <option value="{{ $stage->id }}">{{ $stage->name }}</option>
                                         @empty
@@ -500,9 +504,9 @@
                         </div>
                         <div class="col-sm-6">
                             <div class="input-item input-with-label">
-                                <label class="input-item-label">Payment Gateway</label>
+                                <label class="input-item-label" style="color:#758698 !important;">Payment Gateway</label>
                                 <div class="input-wrap">
-                                    <select name="payment_method" class="select select-block select-bordered">
+                                    <select name="payment_method" class="select select-block select-bordered" style="color:#758698 !important;">
                                         @foreach($pmethods as $pmn)
                                         <option value="{{ $pmn->payment_method }}">{{ ucfirst($pmn->payment_method) }}</option>
                                         @endforeach
@@ -512,7 +516,7 @@
                             </div>
                         </div>
                         <div class="col-sm-6">
-                            <div class="input-item input-with-label">
+                            <div class="input-item input-with-label" style="color:#758698 !important;">
                                 <label class="input-item-label">Payment Amount</label>
                                 <div class="row flex-n guttar-10px">
                                     <div class="col-7">
@@ -521,8 +525,8 @@
                                         </div>
                                     </div>
                                     <div class="col-5">
-                                        <div class="input-wrap">
-                                            <select name="currency" class="select select-block select-bordered">
+                                        <div class="input-wrap" style="color:#758698 !important;">
+                                            <select name="currency" class="select select-block select-bordered" style="color:#758698 !important;">
                                                 @foreach($pm_currency as $gt => $full)
                                                 @if(token('purchase_'.$gt) == 1)
                                                 <option value="{{ strtoupper($gt) }}"{{ base_currency()==$gt ? ' selected=""' : '' }}>{{ strtoupper($gt) }}</option>
@@ -532,30 +536,30 @@
                                         </div>
                                     </div>
                                 </div>
-                                <span class="input-note">Amount calculate based on stage if leave blank.</span>
+                                <span class="input-note" style="color:#758698 !important;">Amount calculate based on stage if leave blank.</span>
                             </div>
                         </div>
                         <div class="col-sm-12">
                             <div class="input-item input-with-label">
-                                <label class="input-item-label">Payment Address</label>
+                                <label class="input-item-label" style="color:#758698 !important;">Payment Address</label>
                                 <div class="input-wrap">
-                                    <input class="input-bordered" type="text" name="wallet_address" placeholder="Optional">
+                                    <input class="input-bordered" type="text" name="wallet_address" placeholder="Optional" style="color:#758698 !important;">
                                 </div>
                             </div>
                         </div>
                         <div class="col-sm-6">
-                            <div class="input-item input-with-label">
-                                <label class="input-item-label">Number of Token</label>
-                                <div class="input-wrap">
-                                    <input class="input-bordered" type="number" name="total_tokens" max="{{ active_stage()->max_purchase }}" required>
+                            <div class="input-item input-with-label" style="color:#758698 !important;">
+                                <label class="input-item-label" style="color:#758698 !important;">Number of Token</label>
+                                <div class="input-wrap" style="color:#758698 !important;">
+                                    <input class="input-bordered" type="number" name="total_tokens" max="{{ active_stage()->max_purchase }}" required style="color:#758698 !important;">
                                 </div>
                             </div>
                         </div>
                         <div class="col-sm-6">
-                            <div class="input-item input-with-label">
+                            <div class="input-item input-with-label" style="color:#758698 !important;">
                                 <label class="input-item-label d-none d-sm-inline-block">&nbsp;</label>
                                 <div class="input-wrap input-wrap-checkbox mt-sm-2">
-                                    <input id="auto-bonus" class="input-checkbox input-checkbox-md" type="checkbox" name="bonus_calc">
+                                    <input id="auto-bonus" class="input-checkbox input-checkbox-md" type="checkbox" name="bonus_calc" style="color:#758698 !important;">
                                     <label for="auto-bonus"><span>Bonus Adjusted from Stage</span></label>
                                 </div>
                             </div>
@@ -563,9 +567,9 @@
                     </div>
                     <button type="submit" class="btn btn-primary">Add Token</button>
                     <div class="gaps-3x"></div>
-                    <div class="note note-plane note-light">
+                    <div class="note note-plane note-light" >
                         <em class="fas fa-info-circle"></em>
-                        <p>If checked <strong>'Bonus Adjusted'</strong>, it will applied bonus based on selected stage (only for Purchase type).</p>
+                        <p style="color:#758698 !important;">If checked <strong>'Bonus Adjusted'</strong>, it will applied bonus based on selected stage (only for Purchase type).</p>
                     </div>
                 </form>
             </div>
