@@ -6,7 +6,7 @@
     <div class="container">
         @include('layouts.messages')
         @include('vendor.notice')
-        <div class="card content-area content-area-mh">
+        <div class="card content-area content-area-mh" id="crad-admin">
             <div class="card-innr">
                 <div class="card-head has-aside">
                     <h4 class="card-title">{{ ucfirst($is_page) }} User List</h4>

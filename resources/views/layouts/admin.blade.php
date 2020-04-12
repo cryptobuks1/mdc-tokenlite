@@ -43,13 +43,14 @@
    .popup-content p {
     color : #101a2d !important;
    }
-   #user_transaction{
+   #user_transaction,#card-admin{
        background-color : #ffffff;
       
    }
    .token-balance .lead {
        color : #ffffff !important;
    }
+
 </style>
 
 <body class="admin-dashboard page-user">
