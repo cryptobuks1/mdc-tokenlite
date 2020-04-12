@@ -73,7 +73,7 @@
                     <div class="topbar-logo">
                         <a href="{{ url('/')}}" class="site-brand">
                 
-                                <img height="40" src="{{ site_whitelabel('logo-light') }}" srcset="{{ site_whitelabel('logo-light2x') }}" alt="Mabuhaycoin">
+                                <img height="40" src="images/logo-mail.png" srcset="images/logo-mail.png" alt="FCC">
                           
                         </a>
                     </div>

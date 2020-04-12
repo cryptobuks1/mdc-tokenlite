@@ -72,7 +72,7 @@
                     </ul>{{-- .topbar-nav --}}
 
                     <a class="topbar-logo" href="{{ url('/') }}">
-                        <img height="40" src="{{ site_whitelabel('logo-light') }}" srcset="{{ site_whitelabel('logo-light2x') }}" alt="{{ site_whitelabel('name') }}">
+                        <img height="40" src="images/logo-mail.png" srcset="images/logo-mail.png" alt="FCC">
                     </a>
                     <ul class="topbar-nav">
                         <li class="topbar-nav-item relative">
