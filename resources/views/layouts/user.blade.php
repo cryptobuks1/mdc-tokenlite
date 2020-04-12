@@ -51,6 +51,9 @@
    .token-balance .lead {
        color : #ffffff !important;
    }
+   .token-balance-icon img {
+       width: 42px;
+   }
 </style>
 </head>
 <body class="user-dashboard page-user theme-modern">
