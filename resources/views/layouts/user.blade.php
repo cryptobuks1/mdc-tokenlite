@@ -72,7 +72,7 @@
                     </ul>{{-- .topbar-nav --}}
 
                     <a class="topbar-logo" href="{{ url('/') }}">
-                        <img height="40" src="{{ asset('images/logo-mail.png') }}" srcset="{{ asset('mages/logo-mail.png') }}" alt="FCC">
+                        <img height="40" src="{{ asset('images/logo-mail.png') }}" srcset="{{ asset('images/logo-mail.png') }}" alt="FCC">
                     </a>
                     <ul class="topbar-nav">
                         <li class="topbar-nav-item relative">

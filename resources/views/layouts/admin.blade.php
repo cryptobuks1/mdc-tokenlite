@@ -73,7 +73,7 @@
                     <div class="topbar-logo">
                         <a href="{{ url('/')}}" class="site-brand">
                 
-                            <img height="40" src="{{ asset('images/logo-mail.png') }}" srcset="{{ asset('mages/logo-mail.png') }}" alt="FCC">
+                            <img height="40" src="{{ asset('images/logo-mail.png') }}" srcset="{{ asset('images/logo-mail.png') }}" alt="FCC">
                           
                         </a>
                     </div>
