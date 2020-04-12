@@ -16,7 +16,7 @@ use App\Models\Transaction;
 use Illuminate\Http\Request;
 use App\Notifications\TnxStatus;
 use App\Http\Controllers\Controller;
-
+use Models\MatrixDownline;
 class TransactionController extends Controller
 {
     /**
@@ -47,6 +47,7 @@ class TransactionController extends Controller
         ];
         return view('user.transactions', compact('trnxs', 'has_trnxs'));
     }
+    
 
     /**
      * Display the specified resource.

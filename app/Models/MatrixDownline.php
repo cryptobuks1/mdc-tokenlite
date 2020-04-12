@@ -13,4 +13,10 @@ class MatrixDownline extends Model
     protected $fillable = [
         'upline_id', 'downline_id', 'level'
     ];
+
+
+    public function downlines()
+    {
+        return $this->belongsTo(User::class, 'user', 'id');
+    }
 }

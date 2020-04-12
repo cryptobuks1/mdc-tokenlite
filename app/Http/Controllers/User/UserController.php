@@ -28,6 +28,8 @@ use PragmaRX\Google2FA\Google2FA;
 use App\Notifications\PasswordChange;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
+use App\Models\MatrixDownline;
+use DB;
 
 class UserController extends Controller
 {
@@ -531,5 +533,46 @@ class UserController extends Controller
         }else{
             abort(404);
         }
+    }
+
+    public function referrals(Request $request) {
+        
+      
+
+        $role_data  = '';
+        $per_page   = gmvl('user_per_page', 10);
+        $order_by   = (gmvl('user_order_by', 'id')=='token') ? 'tokenBalance' : gmvl('user_order_by', 'id');
+        $ordered    = gmvl('user_ordered', 'DESC');
+
+        $is_page    = (empty($role) ? 'all' : ($role=='user' ? 'investor' : $role));
+
+        $users = DB::table('matrix_downlines')
+                    ->select('users.*','matrix_downlines.level')
+                    ->join('users', 'matrix_downlines.downline_id', '=', 'users.id')
+                    ->where('upline_id',auth()->user()->id)
+                    ->paginate($per_page);
+       
+            // $users = User::whereNotIn('status', ['deleted'])->orderBy($order_by, $ordered)->paginate($per_page);
+        
+
+        if($request->s){
+           
+                $users = DB::table('matrix_downlines')
+                        ->select('users.*','matrix_downlines.level')
+                        ->join('users', 'matrix_downlines.downline_id', '=', 'users.id')
+                        ->where('upline_id',auth()->user()->id)
+                        ->where(function($q) use ($request){
+                            $id_num = (int)(str_replace(config('icoapp.user_prefix'), '', $request->s));
+                            $q->orWhere('users.id', $id_num)->orWhere('users.email', 'like', '%'.$request->s.'%')->orWhere('users.name', 'like', '%'.$request->s.'%');
+                        })
+                        ->paginate($per_page);
+        }
+
+       
+        $pagi = $users->appends(request()->all());
+        return view('user.referrals', compact('users', 'role_data', 'is_page', 'pagi'));
+        
+      
+
     }
 }

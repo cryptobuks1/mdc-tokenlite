@@ -67,6 +67,7 @@ Route::prefix('user')->middleware(['auth', 'user', 'verify_user', 'g2fa'])->name
     Route::get('/referral', 'User\UserController@referral')->name('referral');
     // My Token v1.1.2
     Route::get('/account/balance', 'User\UserController@mytoken_balance')->name('token.balance');
+    Route::get('/referrals', 'User\UserController@referrals')->name('referrals');
 
     // User Ajax Request
     Route::name('ajax.')->prefix('ajax')->group(function () {
@@ -189,9 +190,11 @@ Route::name('public.')->group(function () {
     })->name('white.paper');
 
     Route::get('/{slug}', 'PublicController@site_pages')->name('pages');
+   
 });
 
 // Ajax Routes
 Route::prefix('ajax')->name('ajax.')->group(function () {
     Route::post('/kyc/file-upload', 'User\KycController@upload')->name('kyc.file.upload');
 });
+
