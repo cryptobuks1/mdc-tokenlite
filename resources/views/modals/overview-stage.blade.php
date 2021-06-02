@@ -10,16 +10,16 @@
                             <div class="row guttar-vr-20px align-items-center">
                                 <div class="col-sm-6">
                                     <div class="total-block">
-                                        <h6 class="total-title ucap">{{ __('Token Issued') }}</h6>
+                                        <h6 class="total-title ucap">{{ __('Coin Issued') }}</h6>
                                         <span class="total-amount-lead">{{ to_num_token($stage->total_tokens).' '.$symbol }}</span>
                                         <p class="total-note">{{ __('In based price') }} <span>{{ to_num(($stage->total_tokens * $stage->base_price)).' '.$base_symbol }}</span></p>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="total-block">
-                                        <h6 class="total-title ucap">{{ __('Token Sold') }}</h6>
+                                        <h6 class="total-title ucap">{{ __('Coin Sold') }}</h6>
                                         <span class="total-amount-lead">{{ to_num_token($overview->sold).' '.$symbol }} <span class="ml-2 badge badge-auto badge-primary badge-xs fs-12 align-middle" data-toggle="tooltip" data-placement="right" title="{{ __('Sold Out') }}">{{ $overview->percent }}%</span></span>
-                                        <p class="total-note">{{ __('Unsold') }} <span>{{ to_num_token($overview->unsold) }}</span> {{ __('Token') }}</p>
+                                        <p class="total-note">{{ __('Unsold') }} <span>{{ to_num_token($overview->unsold) }}</span> {{ __('Coin') }}</p>
                                     </div>
                                 </div>
                             </div>

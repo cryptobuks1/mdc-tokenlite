@@ -66,8 +66,7 @@ class UserController extends Controller
      * @since 1.0
      * @return void
      */
-    public function account()
-    {
+    public function account() {
         $countries = \IcoHandler::getCountries();
         $user = Auth::user();
         $userMeta = UserMeta::getMeta($user->id);

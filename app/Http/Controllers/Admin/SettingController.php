@@ -79,7 +79,6 @@ class SettingController extends Controller
             $ret['msg'] = 'success';
             $ret['message'] = __('messages.update.success', ['what' => 'New API Key']);
         }
-
         if ($type == 'site_info') {
             $validator = Validator::make($request->all(), [
                 'site_name' => 'required|min:4',
@@ -135,7 +134,7 @@ class SettingController extends Controller
             if ($request->input('theme_user') || $request->input('theme_admin')) {
                 Setting::updateValue('theme_user', $request->input('theme_user'));
                 Setting::updateValue('theme_admin', $request->input('theme_admin'));
-                \Artisan::call('config:clear');
+               // \Artisan::call('config:clear');
             }
             Setting::updateValue('theme_auth_layout', $request->input('theme_auth_layout'));
 

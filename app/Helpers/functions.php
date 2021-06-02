@@ -1110,7 +1110,7 @@ if (!function_exists('active_stage_status')) {
 
         if ($today_date >= $start_date && $today_date <= $end_date) 
         {
-            if ($stage->soldout >= $stage->total_tokens) {
+            if ($stage->sales_token >= $stage->total_tokens) {
                 $status = 'completed';
             }elseif ($stage->status =='paused') {
                 $status = 'paused';
@@ -1124,7 +1124,7 @@ if (!function_exists('active_stage_status')) {
         }
         elseif ($today_date > $end_date) 
         {
-            if ($stage->soldout > 0) {
+            if ($stage->sales_token > 0) {
                 $status = 'completed';
             } else {
                 $status = 'expired';
@@ -1243,7 +1243,7 @@ if (!function_exists('current_price')) {
 if (!function_exists('sale_percent')) {
     function sale_percent($stage=null) {
         $stage = (empty($stage)) ? active_stage() : $stage;
-        $percent = round( (($stage->soldout * 100) / $stage->total_tokens), 1);
+        $percent = round( (($stage->sales_token * 100) / $stage->total_tokens), 1);
         return $percent;
     }
 }
@@ -2062,8 +2062,8 @@ if (!function_exists('ico_stage_progress')) {
             $tp = token_price($stage->total_tokens, $in_currency) > 0 ? token_price($stage->total_tokens, $in_currency) : 0;
             $data = ($in_currency == 'token' ? to_num_token($stage->total_tokens) : to_num($tp, 'auto')).' '. $cur;
         }elseif($type == 'raised'){
-            $tp = token_price($stage->soldout, $in_currency) > 0 ? token_price($stage->soldout, $in_currency) : 0;
-            $data = ($in_currency == 'token' ? to_num_token($stage->soldout) : to_num($tp, 'auto')).' '. $cur;
+            $tp = token_price($stage->sales_token, $in_currency) > 0 ? token_price($stage->sales_token, $in_currency) : 0;
+            $data = ($in_currency == 'token' ? to_num_token($stage->sales_token) : to_num($tp, 'auto')).' '. $cur;
         }elseif($type == 'softtoken'){
             $data = ($in_currency == 'token' ? to_num_token($stage->soft_cap) : to_num(token_price($stage->soft_cap, $in_currency), 'auto')).' '. $cur;
         }elseif($type == 'hardtoken'){

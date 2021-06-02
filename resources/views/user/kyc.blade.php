@@ -78,9 +78,9 @@ $kyc_desc = ($user_kyc !== NULL && isset($_GET['thank_you'])) ? __('Verify your 
                                 <em class="ti ti-files"></em>
                             </div>
                             <span class="status-text text-dark">{{__('Your identity verified successfully.')}}</span>
-                            <p class="px-md-5">{{__('One of our team members verified your identity. Now you can participate in our token sale. Thank you.')}}</p>
+                            <p class="px-md-5">{{__('One of our team members verified your identity. Now you can participate in our coin sale. Thank you.')}}</p>
                             <div class="gaps-2x"></div>
-                            <a href="{{ route('user.token') }}" class="btn btn-primary">{{__('Purchase Token')}}</a>
+                            <a href="{{ route('user.token') }}" class="btn btn-primary">{{__('Purchase Coin')}}</a>
                         </div>
                         @endif
 

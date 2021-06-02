@@ -39,11 +39,13 @@ class TransactionController extends Controller
         $referrals = Transaction::get_by_own(['tnx_type' => 'referral'])->get()->count();
         $bonuses   = Transaction::get_by_own(['tnx_type' => 'bonus'])->get()->count();
         $refunds   = Transaction::get_by_own(['tnx_type' => 'refund'])->get()->count();
+        $bounty   = Transaction::get_by_own(['tnx_type' => 'bounty'])->get()->count();
         $has_trnxs = (object) [
             'transfer' => ($transfers > 0) ? true : false,
             'referral' => ($referrals > 0) ? true : false,
             'bonus' => ($bonuses > 0) ? true : false,
-            'refund' => ($refunds > 0) ? true : false
+            'refund' => ($refunds > 0) ? true : false,
+            'bounty' => ($bounty > 0) ? true : false
         ];
         return view('user.transactions', compact('trnxs', 'has_trnxs'));
     }

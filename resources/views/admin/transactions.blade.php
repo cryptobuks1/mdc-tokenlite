@@ -457,6 +457,7 @@
                                     <select name="type" class="select select-block select-bordered" required style="color:#758698 !important;">
                                         <option value="purchase">Purchase</option>
                                         <option value="bonus">Bonus</option>
+                                        <option value="bounty">Bounty</option>
                                     </select>
                                 </div>
                             </div>

@@ -32,14 +32,14 @@
                                     <div class="col-12">
                                         <div class="switch-content switch-to-referral">
                                             
-                                            <h5 class="card-title-sm text-secondary">Referral <small class="ucap text-primary">(Level 1)</small></h5>
+                                            <h5 class="card-title-sm text-secondary">Invited User <small class="ucap text-primary">(who joined)</small></h5>
                                             <div class="row">
                                                 <div class="col-lg-3 col-sm-6">
                                                     <div class="input-item input-with-label">
                                                         <label class="input-item-label">Referral Bonus Allowed</label>
                                                         <div class="input-wrap">
-                                                            <select id="bonus_applicable" class="select select-block select-bordered " name="referral_allow_join" disabled>
-                                                                <option {{ get_setting('referral_allow_join') == 'all_time' ? 'selected' : '' }} value="all_time">For All Purchases</option>
+                                                            <select id="bonus_applicable" class="select select-block select-bordered " name="referral_allow_join">
+                                                                <option {{ get_setting('referral_allow_join') == 'all_time' ? 'selected' : '' }} value="all_time">For All Transactions</option>
                                                                 @foreach($general->steps_join as $step)
                                                                 <option {{ (get_setting('referral_allow') == $step) ? 'selected ' : '' }}value="{{ $step }}">Max  {{ $step }} Transaction</option>
                                                                 @endforeach
@@ -52,7 +52,7 @@
                                                     <div class="input-item input-with-label">
                                                         <label class="input-item-label">Offering Type</label>
                                                         <div class="input-wrap">
-                                                            <select class="select select-block select-bordered" name="referral_calc_join" disabled>
+                                                            <select class="select select-block select-bordered" name="referral_calc_join">
                                                                 <option {{ get_setting('referral_calc_join') == 'percent' ? 'selected ' : '' }}value="percent">Percentage</option>
                                                                 <option {{ get_setting('referral_calc_join') == 'fixed' ? 'selected ' : '' }}value="fixed">Fixed/Flat</option>
                                                             </select>
@@ -62,9 +62,9 @@
                                                 </div>
                                                 <div class="col-sm-12 col-lg-3">
                                                     <div class="input-item input-with-label">
-                                                        <label class="input-item-label">Bonus </label>
+                                                        <label class="input-item-label">Bonus - Offer Amount</label>
                                                         <div class="input-wrap wide-15">
-                                                            <input type="number" class="input-bordered" min="0" name="referral_bonus_join" value="5" disabled>
+                                                            <input type="number" class="input-bordered" min="0" name="referral_bonus_join" value="{{ get_setting('referral_bonus_join') }}">
                                                             <span class="input-hint input-hint-lg"><span>&nbsp;&nbsp;</span></span>
                                                         </div>
                                                         <div class="input-note">Specify bonus amount for who joined.</div>
@@ -81,14 +81,14 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <h5 class="card-title-sm text-secondary">Referral  <small class="ucap text-primary">(Level 2)</small></h5>
+                                            <h5 class="card-title-sm text-secondary">Referral User <small class="ucap text-primary">(who referred)</small></h5>
                                             <div class="row">
                                                 <div class="col-lg-3 col-sm-6">
                                                     <div class="input-item input-with-label">
                                                         <label class="input-item-label">Referral Bonus Allowed</label>
                                                         <div class="input-wrap">
-                                                            <select id="bonus_applicable" class="select select-block select-bordered " name="referral_allow" disabled>
-                                                                <option {{ get_setting('referral_allow') == 'all_time' ? 'selected' : '' }} value="all_time">For All Purchases</option>
+                                                            <select id="bonus_applicable" class="select select-block select-bordered " name="referral_allow">
+                                                                <option {{ get_setting('referral_allow') == 'all_time' ? 'selected' : '' }} value="all_time">For All Transactions</option>
                                                                 @foreach($general->steps_refer as $step)
                                                                 <option {{ (get_setting('referral_allow') == $step) ? 'selected ' : '' }}value="{{ $step }}">Max  {{ to_num_token($step) }} Tokens</option>
                                                                 @endforeach
@@ -101,7 +101,7 @@
                                                     <div class="input-item input-with-label">
                                                         <label class="input-item-label">Offering Type</label>
                                                         <div class="input-wrap">
-                                                            <select class="select select-block select-bordered" name="referral_calc" disabled>
+                                                            <select class="select select-block select-bordered" name="referral_calc">
                                                                 <option {{ get_setting('referral_calc') == 'percent' ? 'selected ' : '' }}value="percent">Percentage</option>
                                                                 <option {{ get_setting('referral_calc') == 'fixed' ? 'selected ' : '' }}value="fixed">Fixed/Flat</option>
                                                             </select>
@@ -111,48 +111,9 @@
                                                 </div>
                                                 <div class="col-sm-12 col-lg-3">
                                                     <div class="input-item input-with-label">
-                                                        <label class="input-item-label">Bonus </label>
+                                                        <label class="input-item-label">Bonus - Offer Amount</label>
                                                         <div class="input-wrap wide-15">
-                                                            <input type="number" class="input-bordered" min="0" name="referral_bonus" value="3" disabled>
-                                                            <span class="input-hint input-hint-lg"><span>&nbsp;&nbsp;</span></span>
-                                                        </div>
-                                                        <div class="input-note">Specify bonus amount for who referred.</div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <h5 class="card-title-sm text-secondary">Referral  <small class="ucap text-primary">(Level 3)</small></h5>
-                                            <div class="row">
-                                                <div class="col-lg-3 col-sm-6">
-                                                    <div class="input-item input-with-label">
-                                                        <label class="input-item-label">Referral Bonus Allowed</label>
-                                                        <div class="input-wrap">
-                                                            <select id="bonus_applicable" class="select select-block select-bordered " name="referral_allow" disabled>
-                                                                <option {{ get_setting('referral_allow') == 'all_time' ? 'selected' : '' }} value="all_time">For All Purchases</option>
-                                                                @foreach($general->steps_refer as $step)
-                                                                <option {{ (get_setting('referral_allow') == $step) ? 'selected ' : '' }}value="{{ $step }}">Max  {{ to_num_token($step) }} Tokens</option>
-                                                                @endforeach
-                                                            </select>
-                                                        </div>
-                                                        <span class="input-note">Limit with referral bonus amount, how much bonus will add into account for invite someone.</span>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-3 col-sm-6">
-                                                    <div class="input-item input-with-label">
-                                                        <label class="input-item-label">Offering Type</label>
-                                                        <div class="input-wrap">
-                                                            <select class="select select-block select-bordered" name="referral_calc" disabled>
-                                                                <option {{ get_setting('referral_calc') == 'percent' ? 'selected ' : '' }}value="percent">Percentage</option>
-                                                                <option {{ get_setting('referral_calc') == 'fixed' ? 'selected ' : '' }}value="fixed">Fixed/Flat</option>
-                                                            </select>
-                                                        </div>                                        
-                                                        <span class="input-note">Choose whether the referral bonus will calculated as percentage or fixed amount.</span>
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-12 col-lg-3">
-                                                    <div class="input-item input-with-label">
-                                                        <label class="input-item-label">Bonus </label>
-                                                        <div class="input-wrap wide-15">
-                                                            <input type="number" class="input-bordered" min="0" name="referral_bonus" value="2" disabled>
+                                                            <input type="number" class="input-bordered" min="0" name="referral_bonus" value="{{ get_setting('referral_bonus') }}">
                                                             <span class="input-hint input-hint-lg"><span>&nbsp;&nbsp;</span></span>
                                                         </div>
                                                         <div class="input-note">Specify bonus amount for who referred.</div>
@@ -214,7 +175,7 @@
                                 <div class="d-flex">
                                     @csrf
                                     <input type="hidden" name="type" value="referral">
-                                    {{-- <button class="btn btn-primary save-disabled" type="submit" disabled><i class="ti ti-reload"></i><span>Update</span></button> --}}
+                                    <button class="btn btn-primary save-disabled" type="submit" disabled><i class="ti ti-reload"></i><span>Update</span></button>
                                 </div>
                                 <div class="gaps-2x"></div>
                                 <div class="hint"><em><strong>Note:</strong> Bonus will automatically adjust after each successfull transaction. The token balance add into contributor account who referred (and/or who join).</em></div>

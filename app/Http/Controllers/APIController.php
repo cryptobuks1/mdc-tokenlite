@@ -59,7 +59,7 @@ class APIController extends Controller
         $token_cur = to_num_token($token). ' '.token_symbol();
         $token_amt = to_num(token_price($token, $in_total_cur), 'auto', ',') . ' ' . strtoupper($in_total_cur);
 
-        $sold = ($stage->soldout) ? $stage->soldout : 0; //@v1.1.2 @old sales_token
+        $sold = ($stage->sales_token) ? $stage->sales_token : 0; //@v1.1.2 @old sales_token
         $sold_cur = to_num_token($sold). ' '.token_symbol();
         $sold_amt = to_num(token_price($sold, $in_raised_cur), 'auto', ',') . ' ' . strtoupper($in_raised_cur);
 

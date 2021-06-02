@@ -40,6 +40,11 @@ class PublicController extends Controller
         return back();
     }
 
+
+    public function homePage(){
+         return view('public.homepage');
+    }
+
     /**
      * Show the QR Code
      *

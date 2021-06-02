@@ -1,5 +1,5 @@
 @extends('layouts.user')
-@section('title', __(':symbol Token Balance', ['symbol' => token_symbol()]))
+@section('title', __(':symbol  Balance', ['symbol' => token_symbol()]))
 @php
 $has_sidebar = true;
 $symbol = token_symbol();
@@ -13,7 +13,7 @@ $TST = $token_stages;
     <div class="card-innr">
         @include('layouts.messages')
         <div class="card-head">
-            <h4 class="card-title">{{ __('My :symbol Token', ['symbol'=> $symbol]) }}</h4>
+            <h4 class="card-title">{{ __('My :symbol ', ['symbol'=> $symbol]) }}</h4>
         </div>
         <div class="gaps-1x"></div>
 
@@ -39,7 +39,7 @@ $TST = $token_stages;
             <div class="sap sap-light"></div>
             <div class="card-innr">
                 <div class="total-block">
-                    <h5 class="total-title-sm">{{ __('Total Token Amount') }}</h5>
+                    <h5 class="total-title-sm">{{ __('Total Tokens') }}</h5>
                     <span class="total-amount">{{ to_num_token($TAC->total).' '.$symbol }}</span>
                 </div>
                 <div class="total-block">

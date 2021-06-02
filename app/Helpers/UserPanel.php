@@ -165,7 +165,7 @@ class UserPanel
             $return .= '<div class="card card-full-height"><div class="card-innr">';
             $return .= '<h6 class="card-title card-title-sm">'. active_stage()->name .'<span class="badge badge-success ucap">' . __($status) . '</span></h6>';
             $return .= '<h3 class="text-dark">1 ' . $_SYM . ' = ' . to_num($token_1price, 'max', ',', true) . ' ' . $_CUR .' <span class="d-block text-exlight ucap fs-12">1 '. $_CUR . ' = ' . to_num($token_1rate, 'max', ',', true) . ' ' . $token_ratec .'</span></h3>';
-            $return .= '<div class="gaps-0-5x"></div><div class="d-flex align-items-center justify-content-between mb-0"><a href="'.route('user.token').'" class="btn btn-md btn-primary">'.__('Buy Token Now').'</a></div>';
+            $return .= '<div class="gaps-0-5x"></div><div class="d-flex align-items-center justify-content-between mb-0"><a href="'.route('user.token').'" class="btn btn-md btn-primary">'.__('BUY TOKEN NOW').'</a></div>';
                 
             $return .= '</div></div>';
         } else {

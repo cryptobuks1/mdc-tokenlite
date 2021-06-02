@@ -11,7 +11,7 @@
                     <input class="input-bordered" type="hidden" name="req_type" value="approved">
                     <div class="row">
                         <div class="col-12">
-                             <p style="color:#101a2d !important;">User requested to purchase <strong>{{$trnx->total_tokens.' '.token_symbol()}}</strong> Token and payment amount <strong>{{$trnx->amount.' '.strtoupper($trnx->currency)}}</strong>. Please update received amount accrodingly if you received less or more than payment amount.</p>
+                             <p style="color:#101a2d !important;">User requested to purchase <strong>{{$trnx->total_tokens.' '.token_symbol()}}</strong> Coin and payment amount <strong>{{$trnx->amount.' '.strtoupper($trnx->currency)}}</strong>. Please update received amount accrodingly if you received less or more than payment amount.</p>
                              <div class="gaps-1-5x"></div>  
                          </div>
                          <div class="col-sm-6">
@@ -22,14 +22,14 @@
                         </div>
                         <div class="col-sm-6">
                             <div class="input-item input-with-label w-sm-60">
-                                <label class="input-item-label" style="color:#101a2d !important;">Token to adjust</label>
+                                <label class="input-item-label" style="color:#101a2d !important;">Coin to adjust</label>
                                 <input class="input-bordered" type="number" name="total_tokens" id="total_tokens" value="{{ $trnx->total_tokens }}" readonly style="color:#101a2d !important;">
                             </div>
                         </div>
                         <div class="col-12">
                             <div class="input-item">
                                 <input type="checkbox" disabled="" value="1" class="chk_adjust input-checkbox input-checkbox-md" id="token_amount_adjust">
-                                <label for="token_amount_adjust">Check this to confirm adjusted token.</label>
+                                <label for="token_amount_adjust">Check this to confirm adjusted coin.</label>
                             </div>
                         </div>
                     </div>

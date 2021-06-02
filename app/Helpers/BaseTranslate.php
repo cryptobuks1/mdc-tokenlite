@@ -53,7 +53,7 @@ class BaseTranslate
           "User Transaction" => "user_profile,user_transaction",
           "KYC" => "kyc",
           "KYC Form" => "kyc,kyc_form",
-          "Buy token" => "buy_token",
+          "Buy Token" => "buy_token",
           "Payment" => "payment",
           "Payment Order" => "payment,order",
           "Payment Cancel" => "payment,cancel",
@@ -235,7 +235,7 @@ class BaseTranslate
                 "load" => 1
               ],
               "messages.verify.success.msg" => [
-                "text" => "Please sign-in to start token purchase.",
+                "text" => "Please sign-in to start Token purchase.",
                 "pages" => "messages, global",
                 "panel" => "any",
                 "load" => 1
@@ -301,13 +301,13 @@ class BaseTranslate
                 "load" => 1
               ],
               "messages.trnx.minimum_token" => [
-                "text" => "You have to purchase more than 1 token.",
+                "text" => "You have to purchase more than 1 Token.",
                 "pages" => "messages, global",
                 "panel" => "any",
                 "load" => 1
               ],
               "messages.trnx.purchase_token" => [
-                "text" => "Tokens Purchase",
+                "text" => "Token Purchase",
                 "pages" => "messages, global",
                 "panel" => "any",
                 "load" => 1
@@ -337,7 +337,7 @@ class BaseTranslate
                 "load" => 1
               ],
               "messages.trnx.admin.approved" => [
-                "text" => "Transaction approved and token added to user.",
+                "text" => "Transaction approved and Token added to user.",
                 "pages" => "messages, global",
                 "panel" => "any",
                 "load" => 1
@@ -373,7 +373,7 @@ class BaseTranslate
                 "load" => 1
               ],
               "messages.token.failed" => [
-                "text" => "Failed to add token!",
+                "text" => "Failed to add Token!",
                 "pages" => "messages, global",
                 "panel" => "any",
                 "load" => 1
@@ -433,7 +433,7 @@ class BaseTranslate
                 "load" => 1
               ],
               "messages.stage.completed" => [
-                "text" => "Our token sales has been finished. Thank you very much for your contribution.",
+                "text" => "Our Token sales has been finished. Thank you very much for your contribution.",
                 "pages" => "messages, global",
                 "panel" => "any",
                 "load" => 1
@@ -523,7 +523,7 @@ class BaseTranslate
                 "load" => 1
               ],
               "messages.kyc.mandatory" => [
-                "text" => "Identity verification (KYC/AML) is mandatory to participate in our token sale.",
+                "text" => "Identity verification (KYC/AML) is mandatory to participate in our Token sale.",
                 "pages" => "messages, global",
                 "panel" => "any",
                 "load" => 1
@@ -2741,7 +2741,7 @@ class BaseTranslate
                 "load" => 0
               ],
               "buy_token.choose_method" => [
-                "text" => "You can choose any of following payment method to make your payment. The tokens balance will appear in your account after successful payment.",
+                "text" => "You can choose any of following payment method to make your payment. The Tokens balance will appear in your account after successful payment.",
                 "pages" => "buy_token",
                 "panel" => "user",
                 "load" => 0
@@ -2809,37 +2809,37 @@ class BaseTranslate
                 "load" => 0
               ],
               "payment.info.crypto_amount" => [
-                "text" => "Please send :amount :currency to the address below. The token balance will appear in your account only after transaction gets :num confirmation and approved by our team.",
+                "text" => "Please send :amount :currency to the address below. The Token balance will appear in your account only after transaction gets :num confirmation and approved by our team.",
                 "pages" => "payment, order",
                 "panel" => "user",
                 "load" => 0
               ],
               "payment.info.crypto_receive" => [
-                "text" => "To receiving :token :symbol token, please send :amount :currency to the address below. The token balance will appear in your account only after transaction gets :num confirmation and approved by our team.",
+                "text" => "To receiving :token :symbol token, please send :amount :currency to the address below. The Token balance will appear in your account only after transaction gets :num confirmation and approved by our team.",
                 "pages" => "payment, order",
                 "panel" => "user",
                 "load" => 0
               ],
               "payment.info.bank_amount" => [
-                "text" => "Please make your payment of :amount :currency through bank to the below bank address. The token balance will appear in your account only after your transaction gets approved by our team.",
+                "text" => "Please make your payment of :amount :currency through bank to the below bank address. The Token balance will appear in your account only after your transaction gets approved by our team.",
                 "pages" => "payment, order",
                 "panel" => "user",
                 "load" => 0
               ],
               "payment.info.bank_receive" => [
-                "text" => "To receiving :token :symbol token, please make your payment of :amount :currency through bank to the below bank address. The token balance will appear in your account only after your transaction gets approved by our team.",
+                "text" => "To receiving :token :symbol token, please make your payment of :amount :currency through bank to the below bank address. The Token balance will appear in your account only after your transaction gets approved by our team.",
                 "pages" => "payment, order",
                 "panel" => "user",
                 "load" => 0
               ],
               "payment.info.gateway_amount" => [
-                "text" => "The token balance will appear in your account only after you transaction gets :num confirmations and approved by :gateway.",
+                "text" => "The Token balance will appear in your account only after you transaction gets :num confirmations and approved by :gateway.",
                 "pages" => "payment, online",
                 "panel" => "user",
                 "load" => 0
               ],
               "payment.info.gateway_receive" => [
-                "text" => "To receiving :token :symbol token, please make your payment of :amount :currency through :gateway. The token balance will appear in your account after we received your payment.",
+                "text" => "To receiving :token :symbol , please make your payment of :amount :currency through :gateway. The Token balance will appear in your account after we received your payment.",
                 "pages" => "payment, order",
                 "panel" => "user",
                 "load" => 0
@@ -3055,7 +3055,7 @@ class BaseTranslate
                 "load" => 0
               ],
               "payment.bank_note" => [
-                "text" => "The token balance will appear in your account only after your transaction gets approved by our team.",
+                "text" => "The Token balance will appear in your account only after your transaction gets approved by our team.",
                 "pages" => "payment, bank",
                 "panel" => "user",
                 "load" => 0
@@ -3239,19 +3239,19 @@ class BaseTranslate
 
             ///// USER WALLET /////
               "wallet.do_not_use" => [
-                "text" => "DO NOT USE your exchange wallet address OR if you don't have a private key of the your address. You WILL NOT receive your token and WILL LOSE YOUR FUNDS if you do.",
+                "text" => "DO NOT USE your exchange wallet address OR if you don't have a private key of the your address. You WILL NOT receive your Token and WILL LOSE YOUR FUNDS if you do.",
                 "pages" => "user_wallet",
                 "panel" => "user",
                 "load" => 0
               ],
               "wallet.erc_address" => [
-                "text" => "Address should be ERC20-compliant.",
+                "text" => "Address should be ERC20-compliant/BEP20-compliant.",
                 "pages" => "user_wallet",
                 "panel" => "user",
                 "load" => 0
               ],
               "wallet.receive_info" => [
-                "text" => "In order to receive your :SYMBOL token, please select your wallet address and you have to put the address below input box. You will receive :SYMBOL token to this address after the token sale end.",
+                "text" => "In order to receive your :SYMBOL , please select your wallet address and you have to put the address below input box. You will receive :SYMBOL  to this address after the Token sale end.",
                 "pages" => "user_wallet",
                 "panel" => "user",
                 "load" => 0
@@ -3679,7 +3679,7 @@ class BaseTranslate
                 "load" => 0
               ],
               "referral.received_token" => [
-                "text" => "You have received bonus token.",
+                "text" => "You have received bonus Token.",
                 "pages" => "referral",
                 "panel" => "user",
                 "load" => 0

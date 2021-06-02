@@ -185,7 +185,7 @@ class LoginController extends Controller
                 return redirect(route('login'))->with(['danger' => __('messages.login.inactive')]);
             }
         } else {
-            return redirect(url('/login'));
+            return redirect(url('/home'));
         }
     }
 

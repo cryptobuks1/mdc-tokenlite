@@ -45,7 +45,7 @@ $base_currency = base_currency();
                         </div>
                         <div class="col-sm-7 col-md-8">
                             <div class="card-content">
-                                <h4>Thank you for your interest to our ABC Flyingclub</h4>You can contribute FCC token go through Buy Token page. 
+                                <h4>Thank you for your interest to our Modern Development Token</h4>You can contribute MDT go through Buy Token page. 
 
              <br><strong>QR Code shown contains your wallet address.</strong> 
                

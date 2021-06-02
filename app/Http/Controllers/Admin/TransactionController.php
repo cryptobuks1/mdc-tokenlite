@@ -42,11 +42,13 @@ class TransactionController extends Controller
         $order_by = gmvl('tnx_order_by', 'id');
         $ordered  = gmvl('tnx_ordered', 'DESC');
 
-        if($status=='referral' || $status=='bonus') {
+        if($status=='referral' || $status=='bonus' ||  $status=='bounty' ) {
             $trnxs = Transaction::whereNotIn('status', ['deleted', 'new'])->where('tnx_type', $status)->orderBy($order_by, $ordered)->paginate($per_page);
         } elseif($status=='bonuses') {
-            $trnxs = Transaction::whereNotIn('status', ['deleted', 'new'])->whereNotIn('tnx_type', ['withdraw'])->whereIn('tnx_type', ['referral', 'bonus'])->orderBy($order_by, $ordered)->paginate($per_page);
-        } elseif($status=='approved') {
+            $trnxs = Transaction::whereNotIn('status', ['deleted', 'new'])->whereNotIn('tnx_type', ['withdraw'])->whereIn('tnx_type', ['referral', 'bonus','bounty'])->orderBy($order_by, $ordered)->paginate($per_page);
+        } 
+
+        elseif($status=='approved') {
             $trnxs = Transaction::whereNotIn('status', ['deleted', 'new'])->whereNotIn('tnx_type', ['withdraw', 'bonus', 'referral'])->where('status', $status)->orderBy($order_by, $ordered)->paginate($per_page);
         }  elseif($status=='pending') {
             $trnxs = Transaction::whereNotIn('status', ['deleted', 'new'])->whereNotIn('tnx_type', ['withdraw'])->whereIn('status', [$status, 'onhold'])->orderBy($order_by, $ordered)->paginate($per_page);
@@ -233,9 +235,9 @@ class TransactionController extends Controller
 
                         if($trnx->status == 'approved' && is_active_referral_system()){
                             $referral = new ReferralHelper($trnx);
-                            // $referral->addToken('refer_to');
-                            // $referral->addToken('refer_by');
-                            $this->addBonus($id,$trnx->user,$trnx->base_currency_rate);
+                            $referral->addToken('refer_to');
+                            $referral->addToken('refer_by');
+                            //$this->addBonus($id,$trnx->user,$trnx->base_currency_rate);
                         }
 
                         if ($old_status == 'canceled') {
@@ -423,7 +425,7 @@ class TransactionController extends Controller
                 'payment_method' => $request->input('payment_method', 'manual'),
                 'payment_to' => '',
                 'payment_id' => rand(1000, 9999),
-                'details' => ($tnx_type =='bonus' ? 'Bonus Token' : 'Token Purchase'),
+                'details' => ($tnx_type =='bonus' ? 'Bonus Token' : ( $tnx_type =='bounty' ? 'Bounty Reward' : 'Token Purchase')),
                 'status' => 'onhold',
             ];
 

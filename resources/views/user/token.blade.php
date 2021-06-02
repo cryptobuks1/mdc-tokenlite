@@ -1,5 +1,5 @@
 @extends('layouts.user')
-@section('title', __('Purchase Token'))
+@section('title', __('Purchase MDC'))
 
 @section('content')
 @php
@@ -47,11 +47,11 @@ $decimal_max = (token('decimal_max')) ? token('decimal_max') : 0;
         <form action="javascript:void(0)" method="post" class="token-purchase">
             <div class="card-head">
                 <h4 class="card-title">
-                {{ __('Choose currency and calculate :SYMBOL token price', ['symbol' => $symbol]) }}
+                {{ __('Choose currency and calculate :SYMBOL  price', ['symbol' => $symbol]) }}
                 </h4>
             </div>
             <div class="card-text">
-                <p>{{ __('You can buy our :SYMBOL token using the below currency choices to become part of our project.', ['symbol' => $symbol]) }}</p>
+                <p>{{ __('You can buy our :SYMBOL  using the below currency choices to become part of our project.', ['symbol' => $symbol]) }}</p>
             </div>
 
             @if($is_method==true)
@@ -179,7 +179,7 @@ $decimal_max = (token('decimal_max')) ? token('decimal_max') : 0;
                 <div class="pay-notes">
                     <div class="note note-plane note-light note-md font-italic">
                         <em class="fas fa-info-circle"></em>
-                        <p>{{__('Tokens will appear in your account after payment successfully made and approved by our team. Please note that, :SYMBOL token will be distributed after the token sales end-date.', ['symbol' => $symbol]) }}</p>
+                        <p>{{__('Tokens will appear in your account after payment successfully made and approved by our team. Please note that, :SYMBOL  will be distributed after the token sales end-date.', ['symbol' => $symbol]) }}</p>
                     </div>
                 </div>
             </div>
