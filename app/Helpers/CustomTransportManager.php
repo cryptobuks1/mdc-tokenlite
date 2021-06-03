@@ -35,7 +35,7 @@ class CustomTransportManager extends TransportManager
                 'address' => email_setting("from_address", env('MAIL_FROM_ADDRESS', 'noreply@yourdomain.com')),
                 'name' => email_setting("from_name", env('MAIL_FROM_NAME', 'TokenLite')),
             ],
-            'encryption' => 'tls',
+            'encryption' => email_setting("encryption", env('MAIL_ENCRYPTION', 'tls')),
             'username' => email_setting("user_name", env('MAIL_USERNAME')),
             'password' => email_setting("password", env('MAIL_PASSWORD')),
 
