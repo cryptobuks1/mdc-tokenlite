@@ -68,7 +68,7 @@ $decimal_max = (token('decimal_max')) ? token('decimal_max') : 0;
                                     <span class="pay-cur">{{ strtoupper($gt) }}</span>
                                 </span>
                                 @if($is_price_show==1 && isset($token_prices->$gt))
-                                <span class="pay-amount">{{ to_num($token_prices->$gt, 'max') }} {{ strtoupper($gt) }}</span>
+                                <span class="pay-amount" id="{{$gt}}" data-price="{{ to_num($token_prices->$gt, 'max') }}">{{ to_num($token_prices->$gt, 'max') }} {{ strtoupper($gt) }}</span>
                                 @endif
                             </label>
                         </div>       
@@ -101,8 +101,22 @@ $decimal_max = (token('decimal_max')) ? token('decimal_max') : 0;
             $input_sep = '<div class="token-eq-sign"><em class="fas fa-exchange-alt"></em></div>';
             @endphp
             <div class="token-contribute">
-                <div class="token-calc">{!! $input_token_purchase.$input_pay_amount_num !!}</div>
-            
+                <div class="token-calc" style="display: none;">{!! $input_token_purchase.$input_pay_amount_num !!}</div>
+              
+             
+                <div class="token-calc">
+                    <div class="token-pay-amount payment-get"><input class="input-bordered input-with-hint token-number-p" type="number" id="token-number-p" value="" min="100" max="10000">
+                        <div class="token-pay-currency-p"><span class="input-hint input-hint-sap payment-get-cur-p pay-currency " style="text-transform: uppercase;">{!! strtoupper($method) !!}</span></div>
+                    </div>
+                    <div class="token-received token-received-alt">
+                        <div class="token-eq-sign">=</div>
+                        <div class="token-received-amount-p">
+                            <h5 class="token-amount pay-amount-u-p">0</h5>
+                            <div class="token-symbol ">MDT</div>
+                        </div>
+                    </div>
+            </div>
+
                 <div class="token-calc-note note note-plane token-note">
                     <div class="note-box">
                         <span class="note-icon">
@@ -209,7 +223,7 @@ $decimal_max = (token('decimal_max')) ? token('decimal_max') : 0;
             <div class="token-rate-wrap row">
                 <div class="token-rate col-md-6 col-lg-12">
                     <span class="card-sub-title">{{ $symbol }} {{__('Token Price')}}</span>
-                    <h4 class="font-mid text-dark">1 {{ $symbol }} = <span>{{ to_num($token_prices->$bc, 'max') .' '. base_currency(true) }}</span></h4>
+                    <h4 class="font-mid text-dark">1 {{ $symbol }} = <span id="currentokenprice" data-price="{{ to_num($token_prices->$bc, 'max') }}">{{ to_num($token_prices->$bc, 'max') .' '. base_currency(true) }}</span></h4>
                 </div>
                 <div class="token-rate col-md-6 col-lg-12">
                     <span class="card-sub-title">{{__('Exchange Rate')}}</span>
@@ -256,4 +270,40 @@ $decimal_max = (token('decimal_max')) ? token('decimal_max') : 0;
     var minimum_token = {{ $min_token }}, maximum_token ={{ $stage->max_purchase }}, token_price = {!! $token_price !!}, token_symbol = "{{ $symbol }}",
     base_bonus = {!! $bonus !!}, amount_bonus = {!! $amount_bonus !!}, decimals = {"min":{{ $decimal_min }}, "max":{{ $decimal_max }} }, base_currency = "{{ base_currency() }}", base_method = "{{ $method }}";
 </script>
+
+
 @endpush
+@section('tokenCalScript')
+<script>
+    
+  $(function(){
+     var base_price = $('.pay-option-check:checked').val();
+     var current_base_currency_price = $('#currentokenprice').attr('data-price') ;
+     $('.payment-list').on('click','.pay-option-check',function() {
+        base_price =  $(this).val() ;
+        var val = $('#token-number-p').val();
+        var tokenPrice = $('#'+base_price).attr('data-price');
+        var newValue = val / tokenPrice ;
+        $('.pay-amount-u-p').text(newValue.toFixed(3));
+        $('#token-number').val(newValue);
+        $( "#token-number").keyup();
+
+     })
+     console.log(base_price);
+      $('#token-number-p').keyup(function(){
+            var val = $(this).val();
+            var tokenPrice = $('#'+base_price).attr('data-price');
+            var newValue = val / tokenPrice ;
+            $('.pay-amount-u-p').text(newValue.toFixed(3));
+            $('#token-number').val(newValue);
+            $( "#token-number").keyup();
+
+           
+            console.log(newValue  );
+
+      });
+  })
+
+</script>
+
+@endsection

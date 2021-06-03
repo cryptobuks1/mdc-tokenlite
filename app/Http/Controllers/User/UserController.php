@@ -119,6 +119,29 @@ class UserController extends Controller
         return view('user.account-token', compact('user', 'token_account', 'token_stages', 'user_modules'));
     }
 
+
+
+
+     /**
+     * Show the user airdrop page.
+     *
+     * @return \Illuminate\Http\Response
+     * @version 1.0.0
+     * @since 1.1.2
+     * @return void
+     */
+    public function airdrop()
+    {
+        if(gws('user_mytoken_page')!=1) {
+            return redirect()->route('user.home');
+        }
+        $user = Auth::user();
+        $token_account = Transaction::user_mytoken('balance');
+        $token_stages = Transaction::user_mytoken('stages');
+        $user_modules = nio_module()->user_modules();
+        return view('user.airdrop', compact('user', 'token_account', 'token_stages', 'user_modules'));
+    }
+
     /**
      * Activity delete
      *

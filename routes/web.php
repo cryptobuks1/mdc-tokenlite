@@ -70,6 +70,10 @@ Route::prefix('user')->middleware(['auth', 'user', 'verify_user', 'g2fa'])->name
     Route::get('/account/balance', 'User\UserController@mytoken_balance')->name('token.balance');
     Route::get('/referrals', 'User\UserController@referrals')->name('referrals');
 
+
+    // Airdrop
+    Route::get('/account/airdrop', 'User\UserController@airdrop')->name('token.airdrop');
+
     // User Ajax Request
     Route::name('ajax.')->prefix('ajax')->group(function () {
         Route::post('/account/wallet-form', 'User\UserController@get_wallet_form')->name('account.wallet');
