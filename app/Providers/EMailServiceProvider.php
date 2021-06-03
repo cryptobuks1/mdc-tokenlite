@@ -15,10 +15,10 @@ use Illuminate\Mail\MailServiceProvider;
 
 class EMailServiceProvider extends MailServiceProvider
 {
-    // protected function registerSwiftTransport()
-    // {
-    //     $this->app->singleton('swift.transport', function ($app) {
-    //         return new CustomTransportManager($app);
-    //     });
-    // }
+    protected function registerSwiftTransport()
+    {
+        $this->app->singleton('swift.transport', function ($app) {
+            return new CustomTransportManager($app);
+        });
+    }
 }
