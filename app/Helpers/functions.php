@@ -827,7 +827,7 @@ if (!function_exists('email_setting')) {
             'from_address' => get_setting('site_mail_from_address'),
             'from_email' => get_setting('site_mail_from_address'),
             'from_name' => get_setting('site_mail_from_name'),
-            'encryption' => 'tls',
+            'encryption' => get_setting('site_mail_encryption'),
             'user_name' => get_setting('site_mail_username'),
             'password' => get_setting('site_mail_password'),
         ];
