@@ -616,7 +616,7 @@ class UserPanel
      * @since 1.0
      * @return void
      */
-    public  static function token_staking($staking_tenure){
+    public  static function token_staking($staking_tenure = ""){
         $token_staking =  [
                             'semiannual' =>
                                             [
