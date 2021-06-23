@@ -7,6 +7,9 @@
  * @package TokenLite
  * @author Softnio
  * @version 1.0.5
+ * 
+ * @updatedby Louise Salas
+ * @version 1.1.0
  */
 namespace App\Helpers;
 
@@ -604,5 +607,32 @@ class UserPanel
 
         $return = ($refers) ? '<div'.$g_id.' class="referral-info card'.$g_cls.'"><div class="card-innr">'.$heading.$refers.'</div></div>' : '';
         return ( get_page('referral', 'status') == 'active' ? $return : '');
+    }
+
+    /**
+     * token_staking()
+     *
+     * @version 1.3
+     * @since 1.0
+     * @return void
+     */
+    public  static function token_staking($staking_tenure){
+        $token_staking =  [
+                            'semiannual' =>
+                                            [
+                                                'tenure' => '6' ,
+                                                'description' => '6 months',
+                                                'apr'    => '5'
+                                            ],
+                            'annual' =>
+                                            [
+                                                'tenure' => '12' ,
+                                                'description' => '12 months',
+                                                'apr'    => '11'
+                                            ],
+                          ];
+
+            return $token_staking[$staking_tenure] ;
+
     }
 }

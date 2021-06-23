@@ -25,6 +25,7 @@ use App\Http\Controllers\Controller;
 use App\Helpers\TokenCalculate as TC;
 use App\Models\MatrixDownline;
 use DB;
+use App\Models\TokenStaked;
 
 class TransactionController extends Controller
 {
@@ -231,6 +232,7 @@ class TransactionController extends Controller
                         $trnx->checked_time = date('Y-m-d H:i:s');
                         $trnx->save();
 
+                        TokenStaked::where('trnx_id',$id)->update(['status'=>1]);
                      
 
                         if($trnx->status == 'approved' && is_active_referral_system()){

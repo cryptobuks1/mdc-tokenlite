@@ -12,6 +12,10 @@ if ($data->total_bonus > 0) {
             @csrf
             <input type="hidden" name="pp_token" id="token_amount" value="{{ $data->token }}">
             <input type="hidden" name="pp_currency" id="pay_currency" value="{{ $data->currency }}">
+            <input type="hidden" name="staketenure" id="staketenure" value="{{ $data->staketenure }}">
+            <input type="hidden" name="stakestatus" id="stakestatus" value="{{ $data->stakedstatus }}">
+            <input type="hidden" name="stakedamount" id="stakedamount" value="{{ $data->stakedamount }}">
+
             <h4 class="popup-title">{{ __('Payment Process')}}</h4>
             <p class="lead">{!! ($data->total_bonus > 0) ? __('Please make payment of :amount to receive :token_amount token including bonus :token_bonus token.', ['amount' => '<strong>'.$data->amount.' <span class="pay-currency ucap">'.$data->currency.'</span></strong>', 'token_amount'=> '<strong><span class="token-total">'.$data->total_tokens.' '.token('symbol').'</span></strong>', 'token_bonus'=> '<strong><span class="token-bonuses">'.$data->total_bonus.' '.token('symbol').'</span></strong>']) : __('Please make payment of :amount to receive :token_amount token.', ['amount' => '<strong>'.$data->amount.' <span class="pay-currency ucap">'.$data->currency.'</span></strong>', 'token_amount'=> '<strong><span class="token-total">'.$data->total_tokens.' '.token('symbol').'</span></strong>']) !!}
             </p> 

@@ -21,6 +21,7 @@ use App\PayModule\Module;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
 use App\Models\PaymentMethod;
+use App\Models\TokenStaked;
 use App\Notifications\TnxStatus;
 use App\Http\Controllers\Controller;
 use App\Helpers\TokenCalculate as TC;
@@ -102,6 +103,9 @@ class TokenController extends Controller
         $min = $tc->get_current_price('min');
         $currency = $request->input('currency');
         $token = (float) $request->input('token_amount');
+        $staketenure = $request->input('staketenure');
+        $stakedamount = $request->input('stakedamount');
+        $stakedstatus = $request->input('stakedstatus');
         $ret['modal'] = '<a href="#" class="modal-close" data-dismiss="modal"><em class="ti ti-close"></em></a><div class="tranx-popup"><h3>' . __('messages.trnx.wrong') . '</h3></div>';
         $_data = [];
         if (!empty($token) && $token >= $min) {
@@ -115,6 +119,9 @@ class TokenController extends Controller
                 'total_tokens' => $tc->calc_token($token),
                 'base_price' => $tc->calc_token($token, 'price')->base,
                 'amount' => round($tc->calc_token($token, 'price')->$currency, max_decimal()),
+                'staketenure'  => $staketenure ,
+                'stakedamount' => $stakedamount,
+                'stakedstatus' => $stakedstatus
             ];
         }
         if ($this->check($token)) {

@@ -16,6 +16,7 @@ use App\Models\User;
 use App\Models\Setting;
 use App\Models\IcoStage;
 use App\Helpers\IcoHandler;
+use App\Helpers\UserPanel;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
 use App\Models\PaymentMethod;
@@ -23,6 +24,7 @@ use App\PayModule\ModuleHelper;
 use App\PayModule\PmInterface;
 use App\Notifications\TnxStatus;
 use App\Helpers\TokenCalculate as TC;
+use App\Models\TokenStaked;
 
 class BankModule implements PmInterface
 {
@@ -140,9 +142,10 @@ class BankModule implements PmInterface
                 'base_price' => round($tc->calc_token($token, 'price')->base, max_decimal()),
                 'amount' => round($tc->calc_token($token, 'price')->$currency, max_decimal()),
             ];
+              $trnxId =  set_id(rand(100, 999), 'trnx') ;
             $save_data = [
                 'created_at' => Carbon::now()->toDateTimeString(),
-                'tnx_id' => set_id(rand(100, 999), 'trnx'),
+                'tnx_id' => $trnxId,
                 'tnx_type' => 'purchase',
                 'tnx_time' => Carbon::now()->toDateTimeString(),
                 'tokens' => $trnx_data['token'],
@@ -168,6 +171,27 @@ class BankModule implements PmInterface
             ];
             $iid = Transaction::insertGetId($save_data);
 
+
+            // TOKEN STAKING DATA
+            $stakedstatus = $request->input('stakestatus');
+            $staking_tenure = $request->input('staketenure');
+            
+            $stakedTenureData =UserPanel::token_staking($staking_tenure);
+            $staked_data = [
+                'user_id' => Auth::id(),
+                'txn_id' => $trnxId,
+                'staking_tenure'   =>  $staking_tenure ,
+                'token_staked'   => $request->input('stakedamount'),
+                'date_staked'    => Carbon::now()->toDateTimeString(),
+                'staking_receiving_date'  => Carbon::now()->addMonths($stakedTenureData['tenure']),
+                'status'   => 0
+            ];
+            if( $stakedstatus == 'enabled' && !empty($staking_tenure)) {
+                    TokenStaked::insert($staked_data) ;
+            }
+            // END TOKEN STAKING DATA
+
+
             if ($iid != null) {
                 $response['trnx'] = 'true';
                 $response['msg'] = 'info';
@@ -175,6 +199,7 @@ class BankModule implements PmInterface
                 $transaction = Transaction::where('id', $iid)->first();
                 $transaction->tnx_id = set_id($iid, 'trnx');
                 $transaction->save();
+                TokenStaked::where('txn_id',$trnxId)->update(['trnx_id' => $iid  ]);
 
                 IcoStage::token_add_to_account($transaction, 'add');
                 try {

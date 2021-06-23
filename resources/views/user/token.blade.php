@@ -1,5 +1,5 @@
 @extends('layouts.user')
-@section('title', __('Purchase MDC'))
+@section('title', __('Purchase MDT'))
 
 @section('content')
 @php
@@ -105,7 +105,7 @@ $decimal_max = (token('decimal_max')) ? token('decimal_max') : 0;
               
              
                 <div class="token-calc">
-                    <div class="token-pay-amount payment-get"><input class="input-bordered input-with-hint token-number-p" type="number" id="token-number-p" value="" min="100" max="10000">
+                    <div class="token-pay-amount payment-get"><input class="input-bordered input-with-hint token-number-p" type="number" id="token-number-p"  min="100" max="10000">
                         <div class="token-pay-currency-p"><span class="input-hint input-hint-sap payment-get-cur-p pay-currency " style="text-transform: uppercase;">{!! strtoupper($method) !!}</span></div>
                     </div>
                     <div class="token-received token-received-alt">
@@ -126,6 +126,52 @@ $decimal_max = (token('decimal_max')) ? token('decimal_max') : 0;
                         <span class="token-symbol ucap">{{ $symbol }}</span>) {{__('Minimum contribution amount is required.')}}</span>
                     </div>
                     <div class="note-text note-text-alert"></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                         <hr>
+                    </div>
+                </div>
+                  <div class="row">
+                    <div  class="col-md-12">
+                          <div class="card-head">
+                            <h4 class="card-title">{{ __('Stake Token ?') }}</h4>
+                            <div class="form-check">
+                              <input class="form-check-input" type="checkbox" value="" id="stakebtn">
+                              <label class="form-check-label" for="flexCheckIndeterminate">
+                                Check the box to enable token staking , uncheck if not.
+                              </label>
+                            </div>
+                        </div>
+                         <div class="card-text">
+                                <p>{{ __('Earn rewards
+ depending on the staked tenure.') }}</p>
+                            <hr>
+                            </div>
+                            <div id="tokenTenure" style="display:none;">
+                                 <div class="card-text">
+                                <p>{{ __('Choose staked tenure : ') }}</p>
+                            </div>
+                                     <div class="form-check">
+                              <input class="form-check-input" type="radio" value="semiannual" name="staketenure" id="staketenure">
+                              <label class="form-check-label" for="staketenure1">
+                                 6 months (<i>5% APR</i>)
+                              </label>
+                            </div>
+                            <div class="form-check">
+                              <input class="form-check-input" type="radio" value="annual" name="staketenure" id="staketenure" >
+                              <label class="form-check-label" for="staketenure2">
+                                12 months (<i>11% APR</i>)
+                              </label>
+                              <input type="hidden" name="" id="staketenureInput">
+                              <input type="hidden" name="" id="tenureStatus">
+
+                           
+
+
+                        </div>
+                            </div>
+                    </div>
                 </div>
             </div>
 
@@ -152,6 +198,7 @@ $decimal_max = (token('decimal_max')) ? token('decimal_max') : 0;
                     {!! $b_amt_bar !!}
                 </div>
             </div>
+
             @endif
             @if(!$sales_ended)
             <div class="token-overview-wrap">
@@ -182,6 +229,7 @@ $decimal_max = (token('decimal_max')) ? token('decimal_max') : 0;
                 <div class="note note-plane note-danger note-sm pdt-1x pl-0">
                     <p>{{__('Your contribution will be calculated based on exchange rate at the moment when your transaction is confirmed.')}}</p>
                 </div>
+              
             </div>
             @endif
 
@@ -197,7 +245,9 @@ $decimal_max = (token('decimal_max')) ? token('decimal_max') : 0;
                     </div>
                 </div>
             </div>
+
             @else
+
             <div class="alert alert-info alert-center">
                 {{ ($sales_ended) ? __('Our token sales has been finished. Thank you very much for your contribution.') : __('Our sale will start soon. Please check back at a later date/time or feel free to contact us.') }}
             </div>
@@ -284,23 +334,40 @@ $decimal_max = (token('decimal_max')) ? token('decimal_max') : 0;
         var val = $('#token-number-p').val();
         var tokenPrice = $('#'+base_price).attr('data-price');
         var newValue = val / tokenPrice ;
-        $('.pay-amount-u-p').text(newValue.toFixed(3));
-        $('#token-number').val(newValue);
+        $('.pay-amount-u-p').text(parseInt(newValue));
+        $('#token-number').val(parseInt(newValue));
         $( "#token-number").keyup();
+           console($('#token-number').val());
 
-     })
-     console.log(base_price);
+     });
+    
       $('#token-number-p').keyup(function(){
             var val = $(this).val();
             var tokenPrice = $('#'+base_price).attr('data-price');
             var newValue = val / tokenPrice ;
-            $('.pay-amount-u-p').text(newValue.toFixed(3));
-            $('#token-number').val(newValue);
+            $('.pay-amount-u-p').text(parseInt(newValue));
+             $('#token-number').val(parseInt(newValue));
+      
             $( "#token-number").keyup();
 
-           
-            console.log(newValue  );
+          
 
+      });
+      
+      $('#stakebtn').on('click',function(){
+            if($(this).is(':checked')){
+                 $("#tokenTenure").show();
+                 $('#tenureStatus').val('enabled');
+            }
+            else {
+                  $("#tokenTenure").hide();  
+               
+                  $('#tenureStatus').val('');
+
+            }
+      });
+      $('[name=staketenure]').on('click',function(){
+            $('#staketenureInput').val($(this).val());
       });
   })
 
