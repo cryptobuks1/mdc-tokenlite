@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="shortcut icon" href="{{ site_favicon() }}">
-    <title>@yield('title') |  MDC </title>
+    <title>@yield('title') |  MDT </title>
     <link rel="stylesheet" href="{{ asset(style_theme('vendor')) }}">
     <link rel="stylesheet" href="{{ asset(style_theme('user')) }}">
     @stack('header')
@@ -21,6 +21,7 @@
        width: 42px;
    }
 </style>
+@yield('customstyle')
 </head>
 <body class="user-dashboard page-user theme-modern">
     <div class="topbar-wrap">

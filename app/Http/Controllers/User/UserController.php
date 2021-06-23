@@ -16,6 +16,7 @@ use IcoHandler;
 use Carbon\Carbon;
 use App\Models\Page;
 use App\Models\User;
+use App\Models\TokenStaked;
 use App\Models\IcoStage;
 use App\Models\UserMeta;
 use App\Models\Activity;
@@ -53,8 +54,10 @@ class UserController extends Controller
         $contribution = Transaction::user_contribution();
         $tc = new \App\Helpers\TokenCalculate();
         $active_bonus = $tc->get_current_bonus('active');
+        $semiannual  = TokenStaked::where('user_id',$user->id)->where('staking_tenure','semiannual')->where('status',1)->sum('token_staked');
+        $annual  = TokenStaked::where('user_id',$user->id)->where('staking_tenure','annual')->where('status',1)->sum('token_staked');
 
-        return view('user.dashboard', compact('user', 'stage', 'active_bonus', 'contribution'));
+        return view('user.dashboard', compact('user', 'stage', 'active_bonus', 'contribution','semiannual','annual'));
     }
 
 
@@ -116,7 +119,8 @@ class UserController extends Controller
         $token_account = Transaction::user_mytoken('balance');
         $token_stages = Transaction::user_mytoken('stages');
         $user_modules = nio_module()->user_modules();
-        return view('user.account-token', compact('user', 'token_account', 'token_stages', 'user_modules'));
+        $tokenstaked  = TokenStaked::where('user_id',$user->id)->where('status',1)->get();
+        return view('user.account-token', compact('user', 'token_account', 'token_stages', 'user_modules','tokenstaked'));
     }
 
 

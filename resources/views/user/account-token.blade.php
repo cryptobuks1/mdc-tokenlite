@@ -8,7 +8,16 @@ $TAC = $token_account;
 $TST = $token_stages;
 // dd($TST);
 @endphp
+
+@section('customstyle')
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
+@endsection
 @section('content')
+<style type="text/css">
+    html {
+  scroll-behavior: smooth;
+}
+</style>
 <div class="content-area card">
     <div class="card-innr">
         @include('layouts.messages')
@@ -195,4 +204,56 @@ $TST = $token_stages;
     </div>
 </div>{{-- .card --}}
 @endif
+<div class="content-area card" id="tokendstake">
+    <div class="card-innr card-innr-fix-x">
+        <div class="card-head">
+            <h4 class="card-title">TOKENS STAKED</h4>
+        </div>
+         <div class="card-bordered ">
+            <table class="table" id="stakedList">
+                <thead>
+                    <tr>
+                        <th>Token Staked</th>
+                        <th>Staked Tenure</th>
+                        <th>APR</th>
+                        <th>Date Token Staked</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($tokenstaked as $staked)
+                    <tr>
+                        <td>{{ number_format($staked->token_staked)}}</td>
+                        <td>{{ ($staked->staking_tenure == 'annual') ? '12 months' : '6 months'  }}</td>
+                        <td>{{ ($staked->staking_tenure == 'annual') ? '11%' : '5%'  }}</td>
+                        <td>{{ date('F d, Y',strtotime($staked->date_staked)) }}</td>
+                        <td><?php $status= ($staked->status == 1) ? 'active' : 'inactive' ?>
+                            <a href="javascript:void(0)" class="btn btn-xs btn-auto <?=($status == 'active') ? 'btn-success' :'btn-danger' ?>">{{$status}}</a>
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+             
+         </div>
+
+    </div>
+    
+</div>
+@endsection
+
+@section('tokenCalScript')
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript">
+    $(function() {
+    $('#stakedList').DataTable();
+    var hash = location.hash.replace('#', '');
+    if(hash === 'tokendstake') {
+      $('html, body').animate({
+          scrollTop: $('#tokendstake').offset().top
+      }, 500);
+    }
+});
+</script>
+
 @endsection
