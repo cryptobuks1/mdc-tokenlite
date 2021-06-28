@@ -50,7 +50,7 @@ $num = (!empty(manual_payment($cur, 'num')) ? manual_payment($cur, 'num') : 3);
                                                 <input type="text" class="copy-address ignore" value="{{ $_address }}" disabled="" readonly="">
                                                 <button type="button" class="copy-trigger copy-clipboard" data-clipboard-text="{{ $_address }}"><em class="ti ti-files"></em></button>
                                             </div>
-                                             @if(!empty($paymentDestag))
+                                @if(!empty($paymentDestag))
                                  <p class="text-center text-sm-left mb-2"><strong>{{ __('Destination Tag:') }}<br class="d-block d-sm-none">
                                 <span class="fs-16 text-primary">{{ $paymentDestag }}</span>
                             </strong></p>
