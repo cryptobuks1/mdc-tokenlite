@@ -423,7 +423,7 @@ class ManualModule implements PmInterface
         // Output the response of the API call
         if ($transaction_response["error"] == "ok") {
            
-            $dest_tag = ($currency == 'XRP') ? $transaction_response["result"]["address"] : '' ;
+            $dest_tag = ($currency == 'XRP') ? $transaction_response["result"]["dest_tag"] : '' ;
             $transaction = Transaction::where('id', $iid)->first();
             $transaction->address = $transaction_response["result"]["address"];
             $transaction->destination_tag = $dest_tag;
