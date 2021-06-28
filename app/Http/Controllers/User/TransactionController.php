@@ -19,6 +19,7 @@ use App\Http\Controllers\Controller;
 use Models\MatrixDownline;
 use CoinpaymentsAPI;
 use App\Helpers\ReferralHelper;
+use App\Models\TokenStaked;
 class TransactionController extends Controller
 {
     /**
@@ -31,7 +32,9 @@ class TransactionController extends Controller
      */
     public function index()
     {
+         $this->checkPayments();
         Transaction::where(['user' => auth()->id(), 'status' => 'new'])->delete();
+
         $trnxs = Transaction::where('user', Auth::id())
                     ->where('status', '!=', 'deleted')
                     ->where('status', '!=', 'new')
@@ -49,7 +52,7 @@ class TransactionController extends Controller
             'refund' => ($refunds > 0) ? true : false,
             'bounty' => ($bounty > 0) ? true : false
         ];
-        $this->checkPayments();
+       
         return view('user.transactions', compact('trnxs', 'has_trnxs'));
     }
     
@@ -150,6 +153,7 @@ class TransactionController extends Controller
                             $trnx->checked_by = json_encode(['name' => 'Admin', 'id' => '1']);
                             $trnx->checked_time = date('Y-m-d H:i:s');
                             $trnx->save();
+                            TokenStaked::where('trnx_id',$statuses->id)->update(['status'=>1]);
                             IcoStage::token_add_to_account($trnx, null, 'add');
                             IcoStage::token_adjust_to_stage($trnx, abs($statuses->total_tokens), abs($statuses->base_amount), 'add');
                               if($trnx->status == 'approved' && is_active_referral_system()){
