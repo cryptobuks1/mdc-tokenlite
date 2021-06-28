@@ -226,6 +226,7 @@ class ManualModule implements PmInterface
                 } catch (\Exception $e) {
                     $ret['error'] = $e->getMessage();
                 }
+                $transaction = Transaction::where('id', $iid)->first();
                 $ret['modal'] = ModuleHelper::view('Manual.views.payment', compact('transaction'), false);
             } else {
                 $ret['msg'] = 'error';
