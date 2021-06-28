@@ -417,8 +417,8 @@ class ManualModule implements PmInterface
         try {
             $transaction_response = $cps_api->CreateComplexTransaction($amount, $currency1, $currency2, $buyer_email, $address, $buyer_name, $item_name, $item_number, $invoice, $custom, $ipn_url);
         } catch (Exception $e) {
-           echo 'Error: ' . $e->getMessage();
-            exit();
+           //echo 'Error: ' . $e->getMessage();
+           // exit();
         }
 
         // Output the response of the API call
@@ -432,8 +432,8 @@ class ManualModule implements PmInterface
             $transaction->save();
 
         } else {
-            echo $transaction_response["error"];
-            exit();
+            //echo $transaction_response["error"];
+           // exit();
             //echo $currency1 ;
         }
     }
