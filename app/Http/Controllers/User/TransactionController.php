@@ -17,6 +17,8 @@ use Illuminate\Http\Request;
 use App\Notifications\TnxStatus;
 use App\Http\Controllers\Controller;
 use Models\MatrixDownline;
+use CoinpaymentsAPI;
+use App\Helpers\ReferralHelper;
 class TransactionController extends Controller
 {
     /**
@@ -47,6 +49,7 @@ class TransactionController extends Controller
             'refund' => ($refunds > 0) ? true : false,
             'bounty' => ($bounty > 0) ? true : false
         ];
+        $this->checkPayments();
         return view('user.transactions', compact('trnxs', 'has_trnxs'));
     }
     
@@ -110,5 +113,60 @@ class TransactionController extends Controller
             return response()->json($ret);
         }
         return back()->with([$ret['msg'] => $ret['message']]);
+    }
+    public function checkPayments(){
+ 
+
+        $transactionStatus = Transaction::where('user', Auth::id())->whereIn('status',['onhold','pending'])->get();
+      
+          
+          try {
+                $cps_api = new CoinpaymentsAPI(env('COINPAYMENT_PRIVATE_KEY'), env('COINPAYMENT_PUBLIC_KEY'), 'json');
+               // $information = $cps_api->GetDepositAddress('bnb');
+            } catch (Exception $e) {
+                echo 'Error: ' . $e->getMessage();
+                exit();
+            }
+          foreach($transactionStatus as $statuses) {
+            
+                         // Make call to API to create the transaction
+                if(!empty($statuses->coinspaymentid)){
+                    try {
+                        $transaction_response = $cps_api->GetTxInfoSingle($statuses->coinspaymentid);
+                    } catch (Exception $e) {
+                        // echo 'Error: ' . $e->getMessage();
+                       // exit();
+                    }
+
+                    // Output the response of the API call
+                    if ($transaction_response["error"] == "ok") {
+                      
+                     
+                        if($transaction_response["result"]["status_text"] == "Complete"){
+                             $trnx = Transaction::find($statuses->id);
+                            $trnx->receive_currency = $statuses->currency;
+                            $trnx->receive_amount = $statuses->amount;
+                            $trnx->status = 'approved';
+                            $trnx->checked_by = json_encode(['name' => 'Admin', 'id' => '1']);
+                            $trnx->checked_time = date('Y-m-d H:i:s');
+                            $trnx->save();
+                            IcoStage::token_add_to_account($trnx, null, 'add');
+                            IcoStage::token_adjust_to_stage($trnx, abs($statuses->total_tokens), abs($statuses->base_amount), 'add');
+                              if($trnx->status == 'approved' && is_active_referral_system()){
+                                    $referral = new ReferralHelper($trnx);
+                                    $referral->addToken('refer_to');
+                                    $referral->addToken('refer_by');
+                                    
+                                }
+                        }
+                       
+                    } else {
+                       // echo $transaction_response["error"];
+                    }
+
+            }
+        }
+
+
     }
 }
