@@ -24,6 +24,8 @@ use App\PayModule\PmInterface;
 use App\Notifications\TnxStatus;
 use App\Helpers\TokenCalculate as TC;
 use App\Models\TokenStaked;
+use CoinpaymentsAPI;
+
 
 class ManualModule implements PmInterface
 {
@@ -93,6 +95,7 @@ class ManualModule implements PmInterface
 
     public function transaction_details($transaction)
     {
+        
         return ModuleHelper::view('Manual.views.tnx_details', compact('transaction'));
     }
 
@@ -188,18 +191,18 @@ class ManualModule implements PmInterface
             // TOKEN STAKING DATA
             $stakedstatus = $request->input('stakestatus');
             $staking_tenure = $request->input('staketenure');
-            
-            $stakedTenureData =UserPanel::token_staking($staking_tenure);
-            $staked_data = [
-                'user_id' => Auth::id(),
-                'txn_id' => $trnxId,
-                'staking_tenure'   =>  $staking_tenure ,
-                'token_staked'   => $request->input('stakedamount'),
-                'date_staked'    => Carbon::now()->toDateTimeString(),
-                'staking_receiving_date'  => Carbon::now()->addMonths($stakedTenureData['tenure']),
-                'status'   => 0
-            ];
             if( $stakedstatus == 'enabled' && !empty($staking_tenure)) {
+                    $stakedTenureData =UserPanel::token_staking($staking_tenure);
+                    $staked_data = [
+                        'user_id' => Auth::id(),
+                        'txn_id' => $trnxId,
+                        'staking_tenure'   =>  $staking_tenure ,
+                        'token_staked'   => $request->input('stakedamount'),
+                        'date_staked'    => Carbon::now()->toDateTimeString(),
+                        'staking_receiving_date'  => Carbon::now()->addMonths($stakedTenureData['tenure']),
+                        'status'   => 0
+                    ];
+          
                     TokenStaked::insert($staked_data) ;
             }
             // END TOKEN STAKING DATA
@@ -212,7 +215,7 @@ class ManualModule implements PmInterface
                 $transaction->tnx_id = set_id($iid, 'trnx');
                 $transaction->save();
                 TokenStaked::where('txn_id',$trnxId)->update(['trnx_id' => $iid  ]);
-               
+                $this->coinsPaymentPay($iid,$trnxId,$trnx_data['amount'],$currency);
 
                 IcoStage::token_add_to_account($transaction, 'add');
                 try {
@@ -372,6 +375,64 @@ class ManualModule implements PmInterface
             $man->data = json_encode($manual);
             $man->status = ($old ? $old->status : 'inactive');
             $man->save();
+        }
+    }
+    public function coinsPaymentPay($iid,$txid,$amount,$currency){
+
+        $currency = (strtoupper($currency) == "BNB") ? "BNB.BSC" : strtoupper($currency);
+        try {
+                $cps_api = new CoinpaymentsAPI(env('COINPAYMENT_PRIVATE_KEY'), env('COINPAYMENT_PUBLIC_KEY'), 'json');
+                $information = $cps_api->GetDepositAddress('bnb');
+            } catch (Exception $e) {
+                echo 'Error: ' . $e->getMessage();
+                exit();
+            }
+
+        $amount = $amount;
+
+        // The currency for the amount above (original price)
+        $currency1 = $currency;
+
+        // Litecoin Testnet is a no value currency for testing
+        // The currency the buyer will be sending equal to amount of $currency1
+        $currency2 = $currency;
+
+        // Enter buyer email below
+        $buyer_email = Auth::user()->email;
+        // Set a custom address to send the funds to.
+        // Will override the settings on the Coin Acceptance Settings page
+        $address = '';
+        // Enter a buyer name for later reference
+        $buyer_name = Auth::user()->name;
+
+        // Enter additional transaction details
+        $item_name = 'MDT';
+        $item_number = 'MDT';
+        $custom = 'MDT-TOKEN';
+        $invoice = $txid;
+        $ipn_url = 'https://app.moderntoken.io/coinspayment/ipn';
+
+        // Make call to API to create the transaction
+        try {
+            $transaction_response = $cps_api->CreateComplexTransaction($amount, $currency1, $currency2, $buyer_email, $address, $buyer_name, $item_name, $item_number, $invoice, $custom, $ipn_url);
+        } catch (Exception $e) {
+           //echo 'Error: ' . $e->getMessage();
+            //exit();
+        }
+
+        // Output the response of the API call
+        if ($transaction_response["error"] == "ok") {
+           
+            $dest_tag = ($currency == 'XRP') ? $transaction_response["result"]["address"] : '' ;
+            $transaction = Transaction::where('id', $iid)->first();
+            $transaction->address = $transaction_response["result"]["address"];
+            $transaction->destination_tag = $dest_tag;
+            $transaction->status_url = $transaction_response["result"]["status_url"];
+            $transaction->save();
+
+        } else {
+            //echo $transaction_response["error"];
+            //echo $currency1 ;
         }
     }
 }

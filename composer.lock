@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "51c09ac12d1b344bd348e4d75841bda1",
+    "content-hash": "dcde8a4008244726eb53fef88fa27c50",
     "packages": [
         {
             "name": "coinbase/coinbase-commerce",
@@ -99,6 +99,65 @@
                 "payment"
             ],
             "time": "2019-02-26T09:46:31+00:00"
+        },
+        {
+            "name": "coinpaymentsnet/coinpayments-php",
+            "version": "v1.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/CoinPaymentsNet/coinpayments-php.git",
+                "reference": "e7e9f8820c2179f49605aa861d7c7bd485b3c88c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/CoinPaymentsNet/coinpayments-php/zipball/e7e9f8820c2179f49605aa861d7c7bd485b3c88c",
+                "reference": "e7e9f8820c2179f49605aa861d7c7bd485b3c88c",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5.0"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "/src"
+                ],
+                "exclude-from-classmap": [
+                    "/tests"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Cole",
+                    "email": "cole@coinpayments.net",
+                    "homepage": "https://www.coinpayments.net",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A PHP wrapper for the CoinPayments.net v1 API.",
+            "homepage": "https://www.coinpayments.net/apidoc-intro",
+            "keywords": [
+                "api",
+                "bitcoin",
+                "btc",
+                "coinpayments",
+                "crypto",
+                "cryptocurrency",
+                "currency",
+                "ethereum",
+                "litecoin",
+                "merchant",
+                "payment gateway",
+                "payment method",
+                "payment processor",
+                "paypal",
+                "php"
+            ],
+            "time": "2018-09-15T00:00:00+00:00"
         },
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -766,6 +825,56 @@
             "time": "2016-01-20T08:20:44+00:00"
         },
         {
+            "name": "hexters/coinpayment",
+            "version": "v3.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/hexters/CoinPayment.git",
+                "reference": "029ad3bd29361bdcdd6bca7008272c43a3dffb9f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/hexters/CoinPayment/zipball/029ad3bd29361bdcdd6bca7008272c43a3dffb9f",
+                "reference": "029ad3bd29361bdcdd6bca7008272c43a3dffb9f",
+                "shasum": ""
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Hexters\\CoinPayment\\Providers\\CoinPaymentServiceProvider"
+                    ],
+                    "aliases": {
+                        "CoinPayment": "Hexters\\CoinPayment\\CoinPayment"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Hexters\\CoinPayment\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Saifullah Syahidin",
+                    "email": "hexters@gmail.com"
+                }
+            ],
+            "description": "CoinPayment is a Laravel module for handling transactions from CoinPayment like a create transaction, history transaction, etc.",
+            "keywords": [
+                "Coinpayment",
+                "bitcoin",
+                "cryptocurrency",
+                "laravel",
+                "payment gateway"
+            ],
+            "time": "2021-01-09T22:09:24+00:00"
+        },
+        {
             "name": "jakub-onderka/php-console-color",
             "version": "v0.2",
             "source": {
@@ -805,6 +914,7 @@
                     "email": "jakub.onderka@gmail.com"
                 }
             ],
+            "abandoned": "php-parallel-lint/php-console-color",
             "time": "2018-09-29T17:23:10+00:00"
         },
         {
@@ -851,6 +961,7 @@
                 }
             ],
             "description": "Highlight PHP code in terminal",
+            "abandoned": "php-parallel-lint/php-console-highlighter",
             "time": "2018-09-29T18:48:56+00:00"
         },
         {
@@ -2284,6 +2395,7 @@
                 "rest",
                 "sdk"
             ],
+            "abandoned": true,
             "time": "2019-01-04T20:04:25+00:00"
         },
         {
@@ -3019,6 +3131,7 @@
             "keywords": [
                 "tokenizer"
             ],
+            "abandoned": true,
             "time": "2019-07-25T05:29:42+00:00"
         },
         {
@@ -6008,12 +6121,12 @@
             "version": "1.4.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/webmozart/assert.git",
+                "url": "https://github.com/webmozarts/assert.git",
                 "reference": "83e253c8e0be5b0257b881e1827274667c5c17a9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/webmozart/assert/zipball/83e253c8e0be5b0257b881e1827274667c5c17a9",
+                "url": "https://api.github.com/repos/webmozarts/assert/zipball/83e253c8e0be5b0257b881e1827274667c5c17a9",
                 "reference": "83e253c8e0be5b0257b881e1827274667c5c17a9",
                 "shasum": ""
             },
@@ -6118,6 +6231,7 @@
                 "psr",
                 "psr-7"
             ],
+            "abandoned": "laminas/laminas-diactoros",
             "time": "2019-07-10T16:13:25+00:00"
         }
     ],
@@ -6368,5 +6482,6 @@
         "php": "^7.1.3",
         "ext-json": "*"
     },
-    "platform-dev": []
+    "platform-dev": [],
+    "plugin-api-version": "1.1.0"
 }

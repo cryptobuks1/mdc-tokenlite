@@ -161,6 +161,67 @@
         ]
     },
     {
+        "name": "coinpaymentsnet/coinpayments-php",
+        "version": "v1.4",
+        "version_normalized": "1.4.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/CoinPaymentsNet/coinpayments-php.git",
+            "reference": "e7e9f8820c2179f49605aa861d7c7bd485b3c88c"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/CoinPaymentsNet/coinpayments-php/zipball/e7e9f8820c2179f49605aa861d7c7bd485b3c88c",
+            "reference": "e7e9f8820c2179f49605aa861d7c7bd485b3c88c",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.5.0"
+        },
+        "time": "2018-09-15T00:00:00+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "classmap": [
+                "/src"
+            ],
+            "exclude-from-classmap": [
+                "/tests"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Cole",
+                "email": "cole@coinpayments.net",
+                "homepage": "https://www.coinpayments.net",
+                "role": "Developer"
+            }
+        ],
+        "description": "A PHP wrapper for the CoinPayments.net v1 API.",
+        "homepage": "https://www.coinpayments.net/apidoc-intro",
+        "keywords": [
+            "api",
+            "bitcoin",
+            "btc",
+            "coinpayments",
+            "crypto",
+            "cryptocurrency",
+            "currency",
+            "ethereum",
+            "litecoin",
+            "merchant",
+            "payment gateway",
+            "payment method",
+            "payment processor",
+            "paypal",
+            "php"
+        ]
+    },
+    {
         "name": "dnoegel/php-xdg-base-dir",
         "version": "0.1",
         "version_normalized": "0.1.0.0",
@@ -719,7 +780,8 @@
             "data",
             "faker",
             "fixtures"
-        ]
+        ],
+        "abandoned": true
     },
     {
         "name": "guzzlehttp/guzzle",
@@ -965,6 +1027,58 @@
         ]
     },
     {
+        "name": "hexters/coinpayment",
+        "version": "v3.0.0",
+        "version_normalized": "3.0.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/hexters/CoinPayment.git",
+            "reference": "029ad3bd29361bdcdd6bca7008272c43a3dffb9f"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/hexters/CoinPayment/zipball/029ad3bd29361bdcdd6bca7008272c43a3dffb9f",
+            "reference": "029ad3bd29361bdcdd6bca7008272c43a3dffb9f",
+            "shasum": ""
+        },
+        "time": "2021-01-09T22:09:24+00:00",
+        "type": "library",
+        "extra": {
+            "laravel": {
+                "providers": [
+                    "Hexters\\CoinPayment\\Providers\\CoinPaymentServiceProvider"
+                ],
+                "aliases": {
+                    "CoinPayment": "Hexters\\CoinPayment\\CoinPayment"
+                }
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Hexters\\CoinPayment\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Saifullah Syahidin",
+                "email": "hexters@gmail.com"
+            }
+        ],
+        "description": "CoinPayment is a Laravel module for handling transactions from CoinPayment like a create transaction, history transaction, etc.",
+        "keywords": [
+            "Coinpayment",
+            "bitcoin",
+            "cryptocurrency",
+            "laravel",
+            "payment gateway"
+        ]
+    },
+    {
         "name": "jakub-onderka/php-console-color",
         "version": "v0.2",
         "version_normalized": "0.2.0.0",
@@ -1006,7 +1120,8 @@
                 "name": "Jakub Onderka",
                 "email": "jakub.onderka@gmail.com"
             }
-        ]
+        ],
+        "abandoned": "php-parallel-lint/php-console-color"
     },
     {
         "name": "jakub-onderka/php-console-highlighter",
@@ -1054,7 +1169,8 @@
                 "homepage": "http://www.acci.cz/"
             }
         ],
-        "description": "Highlight PHP code in terminal"
+        "description": "Highlight PHP code in terminal",
+        "abandoned": "php-parallel-lint/php-console-highlighter"
     },
     {
         "name": "jaybizzle/crawler-detect",
@@ -2599,7 +2715,8 @@
             "paypal",
             "rest",
             "sdk"
-        ]
+        ],
+        "abandoned": true
     },
     {
         "name": "phar-io/manifest",
@@ -3362,7 +3479,8 @@
         "homepage": "https://github.com/sebastianbergmann/php-token-stream/",
         "keywords": [
             "tokenizer"
-        ]
+        ],
+        "abandoned": true
     },
     {
         "name": "phpunit/phpunit",
@@ -6456,12 +6574,12 @@
         "version_normalized": "1.4.0.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/webmozart/assert.git",
+            "url": "https://github.com/webmozarts/assert.git",
             "reference": "83e253c8e0be5b0257b881e1827274667c5c17a9"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/webmozart/assert/zipball/83e253c8e0be5b0257b881e1827274667c5c17a9",
+            "url": "https://api.github.com/repos/webmozarts/assert/zipball/83e253c8e0be5b0257b881e1827274667c5c17a9",
             "reference": "83e253c8e0be5b0257b881e1827274667c5c17a9",
             "shasum": ""
         },
@@ -6569,6 +6687,7 @@
             "http",
             "psr",
             "psr-7"
-        ]
+        ],
+        "abandoned": "laminas/laminas-diactoros"
     }
 ]

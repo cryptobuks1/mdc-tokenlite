@@ -203,3 +203,6 @@ Route::prefix('ajax')->name('ajax.')->group(function () {
     Route::post('/kyc/file-upload', 'User\KycController@upload')->name('kyc.file.upload');
 });
 
+
+Route::get('paynow','PublicController@payNow')->name('paynow');
+

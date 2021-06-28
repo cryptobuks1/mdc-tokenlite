@@ -10,6 +10,10 @@ $wallet_icon = ($cur=='cad'||$cur=='aud') ? 'usd' : $cur;
 $_address = manual_payment($cur);
 $_amount = $transaction->amount;
 // dd($cur);
+$paymentAddress =  $transaction->address;
+$paymentDestag =  $transaction->destination_tag;
+
+$_address = (!empty($paymentAddress)) ? $paymentAddress : manual_payment($cur);
 $text = strtolower(str_replace(' ', '-', $wallet_name)).':'.$_address.'?amount='.$_amount;
 $num = (!empty(manual_payment($cur, 'num')) ? manual_payment($cur, 'num') : 3);
 @endphp
@@ -43,9 +47,14 @@ $num = (!empty(manual_payment($cur, 'num')) ? manual_payment($cur, 'num') : 3);
                                             <div class="copy-wrap mgb-0-5x">
                                                 <span class="copy-feedback"></span>
                                                 <em class="copy-icon ikon ikon-sign-{{ $wallet_icon }}"></em>
-                                                <input type="text" class="copy-address ignore" value="{{ manual_payment($cur) }}" disabled="" readonly="">
-                                                <button type="button" class="copy-trigger copy-clipboard" data-clipboard-text="{{ manual_payment($cur) }}"><em class="ti ti-files"></em></button>
+                                                <input type="text" class="copy-address ignore" value="{{ $_address }}" disabled="" readonly="">
+                                                <button type="button" class="copy-trigger copy-clipboard" data-clipboard-text="{{ $_address }}"><em class="ti ti-files"></em></button>
                                             </div>
+                                             @if(!empty($paymentDestag))
+                                 <p class="text-center text-sm-left mb-2"><strong>{{ __('Destination Tag:') }}<br class="d-block d-sm-none">
+                                <span class="fs-16 text-primary">{{ $paymentDestag }}</span>
+                            </strong></p>
+                            @endif
                                             @if( (manual_payment('eth', 'limit') || manual_payment('eth', 'price'))  && $cur=='eth' )
                                                 <ul class="pay-info-list row">
                                                     @if(manual_payment('eth', 'limit'))

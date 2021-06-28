@@ -22,6 +22,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Artisan;
 use Symfony\Component\Console\Output\BufferedOutput;
 use Illuminate\Http\Request;
+use Hexters\CoinPayment\CoinPayment;
+use CoinpaymentsAPI;
 
 class PublicController extends Controller
 {
@@ -42,7 +44,64 @@ class PublicController extends Controller
 
 
     public function homePage(){
-         return view('public.homepage');
+       
+
+       try {
+                $cps_api = new CoinpaymentsAPI(env('COINPAYMENT_PRIVATE_KEY'), env('COINPAYMENT_PUBLIC_KEY'), 'json');
+                $information = $cps_api->GetDepositAddress('bnb');
+            } catch (Exception $e) {
+                echo 'Error: ' . $e->getMessage();
+                exit();
+            }
+
+            $amount = 50.00;
+
+        // The currency for the amount above (original price)
+        $currency1 = 'XRP';
+
+        // Litecoin Testnet is a no value currency for testing
+        // The currency the buyer will be sending equal to amount of $currency1
+        $currency2 = 'XRP';
+
+        // Enter buyer email below
+        $buyer_email = 'cyberspace418@gmail.com';
+
+        // Set a custom address to send the funds to.
+        // Will override the settings on the Coin Acceptance Settings page
+        $address = '';
+
+        // Enter a buyer name for later reference
+        $buyer_name = 'MDT-User';
+
+        // Enter additional transaction details
+        $item_name = 'MDT-TOKEN';
+        $item_number = '2018';
+        $custom = 'MDT-TOKEN';
+        $invoice = 'TXN_0001';
+        $ipn_url = 'https://not-a-real-website.com/your_ipn_handler_script.php';
+
+        // Make call to API to create the transaction
+        try {
+            $transaction_response = $cps_api->CreateComplexTransaction($amount, $currency1, $currency2, $buyer_email, $address, $buyer_name, $item_name, $item_number, $invoice, $custom, $ipn_url);
+        } catch (Exception $e) {
+            echo 'Error: ' . $e->getMessage();
+            exit();
+        }
+
+        // Output the response of the API call
+        if ($transaction_response["error"] == "ok") {
+            var_dump($transaction_response);
+            echo $transaction_response["result"]["address"] .'<br>' ;
+            echo $transaction_response["result"]["txn_id"] ;
+            // if($currency2 == 'XRP') {
+            //     echo $transaction_response["result"]["address"] .'<br>' ;
+            //     echo $transaction_response["result"]["txn_id"] ;
+
+            // }
+
+        } else {
+            echo $transaction_response["error"];
+        }
     }
 
     /**
@@ -175,5 +234,25 @@ class PublicController extends Controller
             }
         }
         return redirect()->route('register');
+    }
+    public function payNow(Request $request){
+
+          $transaction['order_id'] = uniqid(); // invoice number
+          $transaction['amountTotal'] = (FLOAT) 37.5;
+          $transaction['note'] = 'Transaction note';
+          $transaction['buyer_name'] = 'Test';
+          $transaction['buyer_email'] =  'test@gmail.com';
+          $transaction['redirect_url'] = url('/back_to_tarnsaction'); // When Transaction was comleted
+          $transaction['cancel_url'] = url('/back_to_tarnsaction'); 
+
+            $transaction['payload'] = [
+                'foo' => [
+                    'bar' => 'baz'
+                ]
+              ];
+
+        //return CoinPayment::generatelink($transaction);
+              echo 'hello';
+
     }
 }
