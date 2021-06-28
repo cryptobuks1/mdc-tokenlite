@@ -286,7 +286,8 @@
                             <th class="data-col dt-usd-amount">Base Amount</th>
                             <th class="data-col pm-gateway dt-account">Pay From</th>
                             <th class="data-col dt-type tnx-type">Type</th>
-                            <th class="data-col"></th>
+                            <th class="data-col dt-type tnx-type">Status</th>
+                            <th class="data-col ">Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -354,6 +355,13 @@
                                 <span class="dt-type-md badge badge-outline badge-md badge-{{$trnx->id}} badge-{{__status($trnx->tnx_type,'status')}}">{{ ucfirst($trnx->tnx_type) }}</span>
                                 <span class="dt-type-sm badge badge-sq badge-outline badge-md badge-{{$trnx->id}} badge-{{__status($trnx->tnx_type,'status')}}">{{ ucfirst(substr($trnx->tnx_type, 0, 1)) }}</span>
                             </td>
+                         
+                                
+                            <td class="data-col data-type">
+                               <a  class="dt-type-md badge badge-outline badge-md badge-info" href="{{ $trnx->status_url }}" target="_blank">
+                                                <em class="ti ti-eye"></em> View</a>
+                            </td>
+                       
                             <td class="data-col text-right">
                                 @if($trnx->status == 'deleted')
                                 <a href="{{ route('admin.transactions.view', $trnx->id) }}" target="_blank" class="btn btn-light-alt btn-xs btn-icon"><em class="ti ti-eye"></em></a>
@@ -383,6 +391,7 @@
                                                 <li id="canceled"><a href="javascript:void(0)" class="tnx-action" data-type="canceled" data-id="{{ $trnx->id }}">
                                                     <em class="fas fa-ban"></em>Cancel</a></li>
                                                 @endif
+                                                
                                             @endif
                                             @if($trnx->status == 'canceled')
                                                 @if( !empty($trnx->checked_by) && ($trnx->payment_method == 'bank' || $trnx->payment_method == 'manual'))
