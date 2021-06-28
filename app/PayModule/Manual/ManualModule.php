@@ -380,7 +380,8 @@ class ManualModule implements PmInterface
     }
     public function coinsPaymentPay($iid,$txid,$amount,$currency){
 
-        $currency = (strtoupper($currency) == "BNB") ? "BNB.BSC" : strtoupper($currency);
+        $currency_new = (strtoupper($currency) == "BNB") ? "BNB.BSC" : strtoupper($currency);
+        $currency = (strtoupper($currency_new) == "LTC") ? "LTCT" : strtoupper($currency_new);
         try {
                 $cps_api = new CoinpaymentsAPI(env('COINPAYMENT_PRIVATE_KEY'), env('COINPAYMENT_PUBLIC_KEY'), 'json');
                 $information = $cps_api->GetDepositAddress('bnb');
@@ -427,6 +428,7 @@ class ManualModule implements PmInterface
             $transaction->address = $transaction_response["result"]["address"];
             $transaction->destination_tag = $dest_tag;
             $transaction->status_url = $transaction_response["result"]["status_url"];
+            $transaction->coinspaymentid = $transaction_response["result"]["txn_id"];
             $transaction->save();
 
         } else {
