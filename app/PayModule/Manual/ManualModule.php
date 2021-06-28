@@ -226,6 +226,7 @@ class ManualModule implements PmInterface
                 } catch (\Exception $e) {
                     $ret['error'] = $e->getMessage();
                 }
+                $transaction = Transaction::where('id', $iid)->first();
                 $ret['modal'] = ModuleHelper::view('Manual.views.payment', compact('transaction'), false);
             } else {
                 $ret['msg'] = 'error';
@@ -389,8 +390,6 @@ class ManualModule implements PmInterface
             }
 
         $amount = $amount;
-
-        // The currency for the amount above (original price)
         $currency1 = $currency;
 
         // Litecoin Testnet is a no value currency for testing
@@ -416,8 +415,8 @@ class ManualModule implements PmInterface
         try {
             $transaction_response = $cps_api->CreateComplexTransaction($amount, $currency1, $currency2, $buyer_email, $address, $buyer_name, $item_name, $item_number, $invoice, $custom, $ipn_url);
         } catch (Exception $e) {
-           echo 'Error: ' . $e->getMessage();
-            exit();
+           //echo 'Error: ' . $e->getMessage();
+           // exit();
         }
 
         // Output the response of the API call
@@ -431,8 +430,8 @@ class ManualModule implements PmInterface
             $transaction->save();
 
         } else {
-            echo $transaction_response["error"];
-            exit();
+            //echo $transaction_response["error"];
+           // exit();
             //echo $currency1 ;
         }
     }
