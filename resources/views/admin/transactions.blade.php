@@ -287,7 +287,7 @@
                             <th class="data-col pm-gateway dt-account">Pay From</th>
                             <th class="data-col dt-type tnx-type">Type</th>
                             <th class="data-col dt-type tnx-type">Status</th>
-                            <th class="data-col ">Action</th>
+                            <th class="data-col ">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
