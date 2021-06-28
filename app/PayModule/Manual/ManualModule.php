@@ -390,8 +390,6 @@ class ManualModule implements PmInterface
             }
 
         $amount = $amount;
-
-        // The currency for the amount above (original price)
         $currency1 = $currency;
 
         // Litecoin Testnet is a no value currency for testing
