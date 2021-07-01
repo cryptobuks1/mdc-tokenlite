@@ -16,10 +16,14 @@ use App\Models\Transaction;
 use Illuminate\Http\Request;
 use App\Notifications\TnxStatus;
 use App\Http\Controllers\Controller;
-use Models\MatrixDownline;
+use Carbon\Carbon;
 use CoinpaymentsAPI;
 use App\Helpers\ReferralHelper;
 use App\Models\TokenStaked;
+use App\Models\Setting;
+use App\Helpers\TokenCalculate as TC;
+use App\Models\MatrixDownline;
+use DB;
 class TransactionController extends Controller
 {
     /**
@@ -156,12 +160,16 @@ class TransactionController extends Controller
                             TokenStaked::where('trnx_id',$statuses->id)->update(['status'=>1]);
                             IcoStage::token_add_to_account($trnx, null, 'add');
                             IcoStage::token_adjust_to_stage($trnx, abs($statuses->total_tokens), abs($statuses->base_amount), 'add');
-                              if($trnx->status == 'approved' && is_active_referral_system()){
-                                    $referral = new ReferralHelper($trnx);
-                                    $referral->addToken('refer_to');
-                                    $referral->addToken('refer_by');
+
+                             $this->addBonus($statuses->id,Auth::user()->id,$trnx->base_currency_rate);
+                              // if($trnx->status == 'approved' && is_active_referral_system()){
+                              //       // $referral = new ReferralHelper($trnx);
+                              //       // $referral->addToken('refer_to');
+                              //       // $referral->addToken('refer_by');
+                              //        $this->addBonus($statuses->id,$trnx->user,$trnx->base_currency_rate);
                                     
-                                }
+                              //   }
+
                         }
                        
                     } else {
@@ -173,4 +181,62 @@ class TransactionController extends Controller
 
 
     }
+
+
+public function addBonus($tokens,$downline_id,$base_rate) {
+
+        $tc = new TC();
+        $tokentotal = DB::table('transactions')->where('id',$tokens)->sum('tokens');
+      
+        $tnx_type = 'referral';
+        $currency = 'usd';
+        $currency_rate = Setting::exchange_rate($tc->get_current_price(), $currency);
+        $base_currency = strtolower(base_currency());
+        $base_currency_rate = Setting::exchange_rate($tc->get_current_price(), $base_currency);
+        $all_currency_rate = json_encode(Setting::exchange_rate($tc->get_current_price(), 'except'));
+        $added_time = Carbon::now()->toDateTimeString();
+        $tnx_date   = date('Y-m-d').' '.date('H:i');
+
+        $uplines =  MatrixDownline::where('downline_id',$downline_id)->get();
+        //$username = User::where('id',$downline_id)->fi;
+        $percentage = ['level1' => 5 ,'level2' => 3 , 'level3' => 2 ];
+       foreach($uplines as $upline) {
+        echo $upline->level ;
+           $level = 'level'.$upline->level;
+        $bonus_tokens = number_format($tokentotal * ($percentage[$level] / 100),2) ;
+        $amount_in_usd = $bonus_tokens * $base_rate ;
+       
+        $save_data = [
+            'created_at' => $added_time,
+            'tnx_id' => set_id(rand(100, 999), 'trnx'),
+            'tnx_type' => $tnx_type,
+            'tnx_time' => $added_time,
+            'tokens' => $bonus_tokens,
+            'bonus_on_base' => 0,
+            'bonus_on_token' => 0,
+            'total_bonus' => 0,
+            'total_tokens' => $bonus_tokens,
+            'stage' =>  1,
+            'user' => $upline->upline_id,
+            'amount' => $amount_in_usd,
+            'receive_amount' => $amount_in_usd,
+            'receive_currency' => 'usd',
+            'base_amount' => $amount_in_usd,
+            'base_currency' => $base_currency,
+            'base_currency_rate' => $base_currency_rate,
+            'currency' => $currency,
+            'currency_rate' => $currency_rate,
+            'all_currency_rate' => $all_currency_rate,
+            'payment_method' => 'system',
+            'payment_to' => '',
+            'payment_id' => rand(1000, 9999),
+            'details' =>'Level ' . $upline->level . ' Bonus Token ',
+            'status' => 'approved',
+        ];
+        DB::table('users')->where('id',$upline->upline_id)->increment('tokenBalance',$bonus_tokens + 0);
+        DB::table('transactions')->insert($save_data);
+    }
+   
+ }
+
 }
