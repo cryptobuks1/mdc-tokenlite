@@ -201,7 +201,7 @@ public function addBonus($tokens,$downline_id,$base_rate) {
         //$username = User::where('id',$downline_id)->fi;
         $percentage = ['level1' => 5 ,'level2' => 3 , 'level3' => 2 ];
        foreach($uplines as $upline) {
-        echo $upline->level ;
+       
            $level = 'level'.$upline->level;
         $bonus_tokens = number_format($tokentotal * ($percentage[$level] / 100),2) ;
         $amount_in_usd = $bonus_tokens * $base_rate ;
@@ -236,7 +236,10 @@ public function addBonus($tokens,$downline_id,$base_rate) {
         DB::table('users')->where('id',$upline->upline_id)->increment('tokenBalance',$bonus_tokens + 0);
         DB::table('transactions')->insert($save_data);
     }
-   
+
+ }
+ public function referralTransaction(Request $request){
+        
  }
 
 }
