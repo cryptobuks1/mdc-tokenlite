@@ -10,7 +10,7 @@
         <div class="card content-area content-area-mh" id="crad-admin" style="background-color:#ffffff;">
             <div class="card-innr">
                 <div class="card-head has-aside">
-                    <h4 class="card-title" style="color:#455e84 !important;"> Referral List</h4>
+                    <h4 class="card-title" style="color:#455e84 !important;">My Referrals </h4>
                     {{-- <div class="relative d-inline-block d-md-none">
                         <a href="#" class="btn btn-light-alt btn-xs btn-icon toggle-tigger"><em class="ti ti-more-alt"></em></a>
                         <div class="toggle-class dropdown-content dropdown-content-center-left pd-2x">
@@ -60,7 +60,7 @@
                         <tr class="data-item data-head">
                             <th class="data-col data-col-wd-md filter-data dt-user">User</th>
                             <th class="data-col data-col-wd-md dt-email">Email</th>
-                          <!--   <th class="data-col data-col-wd-md">Level</th> -->
+                            <th class="data-col data-col-wd-md">Level</th>
                             <th class="data-col dt-token">Tokens</th>
                             
                           
@@ -87,7 +87,8 @@
                             <td class="data-col data-col-wd-md dt-email">
                                 <span class="sub sub-s2 sub-email text-wrap">{{ explode_user_for_demo($user->email, auth()->user()->type ) }}</span>
                             </td>
-                                                       </td>
+                            <td> {{ $user->level }}</td>
+
                             <td class="data-col dt-token">
                                 <span class="lead lead-btoken">{{ number_format($user->tokenBalance) }}</span>
                             </td>

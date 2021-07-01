@@ -71,6 +71,7 @@
                     <th class="data-col dt-base-amount">{{ base_currency(true) }} {{ __('Amount') }}</th>
                     <th class="data-col dt-account">{{ __('To') }}</th>
                     <th class="data-col dt-type tnx-type"><div class="dt-type-text">{{ __('Type') }}</div></th>
+                    <th class="data-col dt-type tnx-type"><div class="dt-type-text">{{ __('Description') }}</div></th>
                     <th class="data-col"></th>
                 </tr>
             </thead>
@@ -134,7 +135,11 @@
                         <span class="dt-type-md badge badge-outline badge-md badge-{{__status($trnx->tnx_type,'status')}}">{{ ucfirst($trnx->tnx_type) }}</span>
                         <span class="dt-type-sm badge badge-sq badge-outline badge-md badge-{{ __status($trnx->tnx_type, 'status') }}">{{ ucfirst(substr($trnx->tnx_type, 0,1)) }}</span>
                     </td>
+                     <td class="data-col dt-type">
+                         <small>{{$trnx->details}}</small>
+                    </td>
                     <td class="data-col text-right">
+                     @if($trnx->tnx_type != 'referral')
                         @if($trnx->status == 'pending' || $trnx->status == 'onhold')
                             @if($trnx->tnx_type != 'transfer')
                             <div class="relative d-inline-block d-md-none">
@@ -156,14 +161,18 @@
                                 @endif
                             </ul>
                             @else 
+                             
                                 <a href="javascript:void(0)" class="view-transaction btn btn-light-alt btn-xs btn-icon" data-id="{{ $trnx->id }}"><em class="ti ti-eye"></em></a>
+                           
                             @endif
                         @else
+
                         <a href="javascript:void(0)" class="view-transaction btn btn-light-alt btn-xs btn-icon" data-id="{{ $trnx->id }}"><em class="ti ti-eye"></em></a>
                             @if($trnx->checked_time == NUll && ($trnx->status == 'rejected' || $trnx->status == 'canceled'))
                             <a href="{{ route('user.ajax.transactions.delete', $trnx->id) }}" class="btn btn-danger-alt btn-xs btn-icon user_tnx_trash" data-tnx_id="{{ $trnx->id }}"><em class="ti ti-trash"></em></a>
                             @endif
                         @endif
+                     @endif
                     </td>
                 </tr>{{-- .data-item --}}
                 @endforeach

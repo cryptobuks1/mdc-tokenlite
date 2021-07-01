@@ -236,9 +236,7 @@ class TransactionController extends Controller
                      
 
                         if($trnx->status == 'approved' && is_active_referral_system()){
-                            // $referral = new ReferralHelper($trnx);
-                            // $referral->addToken('refer_to');
-                            // $referral->addToken('refer_by');
+                            
                             $this->addBonus($id,$trnx->user,$trnx->base_currency_rate);
                         }
 
