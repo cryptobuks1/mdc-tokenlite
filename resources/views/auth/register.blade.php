@@ -6,9 +6,32 @@
 $check_users = \App\Models\User::count();
 @endphp
 
+<style type="text/css">
+    .header-text {
+        width: 440px;
+        max-width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+        color: #FDBB1F;
+        padding-bottom: 40px;
+    }
+    .header-text p {
+        font-size: 18px;
+        margin-bottom: 0;
+    }
+    .page-ath-alt .page-ath-header {
+        padding-bottom: 0px;
+    }
+</style>
+<div class="header-text">
+    <p>Power the vision, benefit from the MDT ecosystem</p>
+    <small>Make intelligent, green living accessible.</small>
+</div>
 <div class="page-ath-form">
 
     <h2 class="page-ath-heading">{{__('Sign up')}} </h2>
+
     <form class="register-form validate validate-modern" method="POST" action="{{ route('register') }}" id="register">
         @csrf
         @include('layouts.messages')
@@ -39,7 +62,7 @@ $check_users = \App\Models\User::count();
             @if(get_page_link('terms') || get_page_link('policy'))
             <div class="input-item text-left">
                 <input name="terms" class="input-checkbox input-checkbox-md" id="agree" type="checkbox" required="required" data-msg-required="{{ __("You should accept our terms and policy.") }}">
-                <label for="agree">{!! __('I agree to the') . ' ' .get_page_link('terms', ['target'=>'_blank', 'name' => true, 'status' => true]) . ((get_page_link('terms', ['status' => true]) && get_page_link('policy', ['status' => true])) ? ' '.__('and').' ' : '') . get_page_link('policy', ['target'=>'_blank', 'name' => true, 'status' => true]) !!}.</label>
+                <label for="agree">{!! __("I agree to the MDT's ") . ' ' .get_page_link('terms', ['target'=>'_blank', 'name' => true, 'status' => true]) . ((get_page_link('terms', ['status' => true]) && get_page_link('policy', ['status' => true])) ? ' '.__('and').' ' : '') . get_page_link('policy', ['target'=>'_blank', 'name' => true, 'status' => true]) !!}.</label>
             </div>
             @else
             <div class="input-item text-left">
@@ -66,7 +89,7 @@ $check_users = \App\Models\User::count();
 
         <div class="gaps-4x"></div>
         <div class="form-note">
-            {{__('Already have an account ?')}} <a href="{{ route('login') }}"> <strong>{{__('Sign in instead')}}</strong></a>
+            {{__('Already have an account ?')}} <a href="{{ route('login') }}"> <strong>{{__('Sign in')}}</strong></a>
         </div>
     @endif
 </div>
