@@ -14,6 +14,12 @@
     @if(get_setting('site_header_code', false))
     {{ html_string(get_setting('site_header_code')) }}
     @endif
+
+    <style type="text/css">
+        .page-ath-alt .page-ath-wrap {
+            background-color: #000000f0;
+        }
+    </style>
 </head>
 @php 
 $auth_layout = (gws('theme_auth_layout', 'default'));
@@ -22,8 +28,10 @@ $body_class = ($auth_layout=='center-dark'||$auth_layout=='center-light') ? ' pa
 $body_bgc   = ($auth_layout=='center-dark') ? ' bg-secondary' : '';
 $wrap_class = ($auth_layout=='default') ? ' flex-row-reverse' : '';
 
-$header_logo = '<div class="page-ath-header"><a href="'.url('/').'" class="page-ath-logo"><img class="page-ath-logo-img" src="/images/logo-mail.png" srcset="/images/logo-mail.png" alt="'. site_whitelabel('name') .'"></a></div>';
+$header_logo = '<div class="page-ath-header"><a href="'.url('/').'" class="page-ath-logo"><img class="page-ath-logo-img" src="/images/logo-mdt.png" srcset="/images/logo-mdt.png" alt="'. site_whitelabel('name') .'"></a></div>';
 @endphp
+
+
 <body class="page-ath theme-modern page-ath-modern{{ $body_class.$body_bgc }}">
 
     <div class="page-ath-wrap{{ $wrap_class }}">
