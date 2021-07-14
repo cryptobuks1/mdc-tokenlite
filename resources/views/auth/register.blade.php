@@ -8,7 +8,7 @@ $check_users = \App\Models\User::count();
 
 <div class="page-ath-form">
 
-    <h2 class="page-ath-heading">{{__('Sign up')}} <small>{{__('Create New')}} {{ site_info('name') }} {{__('Account')}}</small></h2>
+    <h2 class="page-ath-heading">{{__('Sign up')}} </h2>
     <form class="register-form validate validate-modern" method="POST" action="{{ route('register') }}" id="register">
         @csrf
         @include('layouts.messages')
