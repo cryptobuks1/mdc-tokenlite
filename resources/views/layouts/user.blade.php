@@ -20,6 +20,9 @@
    .token-balance-icon img {
        width: 42px;
    }
+   .topbar {
+       background: #000000 !important;
+   }
 </style>
 @yield('customstyle')
 </head>
@@ -42,7 +45,7 @@
                     </ul>{{-- .topbar-nav --}}
 
                     <a class="topbar-logo" href="{{ url('/') }}">
-                        <img height="40" src="{{ asset('images/logo-mail.png') }}" srcset="{{ asset('images/logo-mail.png') }}" alt="FCC">
+                        <img height="40" src="{{ asset('images/logo-mdt.png') }}" srcset="{{ asset('images/logo-mdt.png') }}" alt="FCC">
                     </a>
                     <ul class="topbar-nav">
                         <li class="topbar-nav-item relative">

@@ -15,7 +15,9 @@
 </head>
 
 <style>
-   
+   .topbar {
+       background: #000000 !important;
+   }
 
 </style>
 
@@ -39,7 +41,7 @@
                     <div class="topbar-logo">
                         <a href="{{ url('/')}}" class="site-brand">
                 
-                            <img height="40" src="{{ asset('images/logo-mail.png') }}" srcset="{{ asset('images/logo-mail.png') }}" alt="FCC">
+                            <img height="40" src="{{ asset('images/logo-mdt.png') }}" srcset="{{ asset('images/logo-mdt.png') }}" alt="MDT">
                           
                         </a>
                     </div>
