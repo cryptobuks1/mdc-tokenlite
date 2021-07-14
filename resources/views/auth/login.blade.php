@@ -2,6 +2,28 @@
 @section('title', __('Sign-in'))
 @section('content')
 
+<style type="text/css">
+    .header-text {
+        width: 440px;
+        max-width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+        color: #FDBB1F;
+        padding-bottom: 40px;
+    }
+    .header-text p {
+        font-size: 18px;
+        margin-bottom: 0;
+    }
+    .page-ath-alt .page-ath-header {
+        padding-bottom: 0px;
+    }
+</style>
+<div class="header-text">
+    <p>Power the vision, benefit from the MDT ecosystem</p>
+    <small>Make intelligent, green living accessible.</small>
+</div>
 <div class="page-ath-form">
     <h2 class="page-ath-heading">{{ __('Sign in') }}</h2>
     <form class="login-form validate validate-modern" action="{{ (is_maintenance() ? route('admin.login') : route('login')) }}" method="POST">
