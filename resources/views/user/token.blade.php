@@ -163,7 +163,7 @@ $decimal_max = (token('decimal_max')) ? token('decimal_max') : 0;
                             <div class="form-check">
                               <input class="form-check-input" type="radio" value="annual" name="staketenure" id="staketenure" >
                               <label class="form-check-label" for="staketenure2">
-                                12 months (<i>11% APR</i>)
+                                12 months (<i>12% APR</i>)
                               </label>
                               <input type="hidden" name="" id="staketenureInput">
                               <input type="hidden" name="" id="tenureStatus">

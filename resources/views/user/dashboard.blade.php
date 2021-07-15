@@ -60,7 +60,7 @@ $base_currency = base_currency();
                       <ul class="token-balance-list">
                           <li class="token-balance-sub"><span class="lead">{{ number_format($semiannual) }} MDT</span><span class="sub">6 months ( <i>5% APR</i> )</span>
                           </li>
-                          <li class="token-balance-sub"><span class="lead">{{ number_format($annual) }} MDT</span><span class="sub">12 months ( <i>11% APR</i> )</span>
+                          <li class="token-balance-sub"><span class="lead">{{ number_format($annual) }} MDT</span><span class="sub">12 months ( <i>12% APR</i> )</span>
                           </li>
                           
                       </ul>
