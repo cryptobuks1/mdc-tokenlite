@@ -628,7 +628,7 @@ class UserPanel
                                             [
                                                 'tenure' => '12' ,
                                                 'description' => '12 months',
-                                                'apr'    => '11'
+                                                'apr'    => '12'
                                             ],
                           ];
 
