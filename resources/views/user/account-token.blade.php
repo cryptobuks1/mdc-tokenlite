@@ -225,7 +225,7 @@ $TST = $token_stages;
                     <tr>
                         <td>{{ number_format($staked->token_staked)}}</td>
                         <td>{{ ($staked->staking_tenure == 'annual') ? '12 months' : '6 months'  }}</td>
-                        <td>{{ ($staked->staking_tenure == 'annual') ? '11%' : '5%'  }}</td>
+                        <td>{{ ($staked->staking_tenure == 'annual') ? '12%' : '5%'  }}</td>
                         <td>{{ date('F d, Y',strtotime($staked->date_staked)) }}</td>
                         <td><?php $status= ($staked->status == 1) ? 'active' : 'inactive' ?>
                             <a href="javascript:void(0)" class="btn btn-xs btn-auto <?=($status == 'active') ? 'btn-success' :'btn-danger' ?>">{{$status}}</a>
