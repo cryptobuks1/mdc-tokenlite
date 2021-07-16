@@ -306,8 +306,22 @@
                                 <span class="sub sub-s2 sub-time">{{ $user->lastLogin && $user->email_verified_at !== null ? _date($user->lastLogin) : 'Not logged yet' }}</span>
                             </td>
                             <td class="data-col dt-status">
-                                <span class="dt-status-md badge badge-outline badge-md badge-{{ __status($user->status,'status') }}">{{ __status($user->status,'text') }}</span>
-                                <span class="dt-status-sm badge badge-sq badge-outline badge-md badge-{{ __status($user->status,'status') }}">{{ substr(__status($user->status,'text'), 0, 1) }}</span>
+                                @php
+                                    $userstatus = "Pending";
+                                    $badge = "warning";
+                                    $kycstat = "pending";
+                                    if(isset($user->kyc_info->status)) {
+                                        $kycstat = $user->kyc_info->status ;
+                                        
+                                    }
+                                    if( $user->email_verified_at !== null && $kycstat == 'approved'){
+                                        $userstatus = "Active";
+                                        $badge = 'success';
+                                    }
+                                    
+                                @endphp
+                                <span class="dt-status-md badge badge-outline badge-md badge-{{$badge}}">{{ $userstatus }}</span>
+                                <span class="dt-status-sm badge badge-sq badge-outline badge-md badge-{{$badge}}">{{ substr($userstatus, 0, 1) }}</span>
                             </td>
                             <td class="data-col text-right">
                                 <div class="relative d-inline-block">
