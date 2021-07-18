@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>MDT TOKEN AIDROP</title>
+  <title>MDT TOKEN AIRDROP</title>
  <meta name="description" content="Power the vision, benefit from the MDT ecosystem.Make intelligent, green living accessible.">
 
 <!-- Open Graph / Facebook -->
@@ -17,7 +17,7 @@
 <!-- Twitter -->
 <meta property="twitter:card" content="summary_large_image">
 <meta property="twitter:url" content="https://app.moderntoken.io/airdrop">
-<meta property="twitter:title" content="MDT TOKEN AIDROP">
+<meta property="twitter:title" content="MDT TOKEN AIRDROP">
 <meta property="twitter:description" content="Power the vision, benefit from the MDT ecosystem.Make intelligent, green living accessible.">
 <meta property="twitter:image" content="">
 <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
