@@ -203,24 +203,9 @@ class PublicController extends Controller
         }
         return redirect()->route('register');
     }
-    public function payNow(Request $request){
-
-          $transaction['order_id'] = uniqid(); // invoice number
-          $transaction['amountTotal'] = (FLOAT) 37.5;
-          $transaction['note'] = 'Transaction note';
-          $transaction['buyer_name'] = 'Test';
-          $transaction['buyer_email'] =  'test@gmail.com';
-          $transaction['redirect_url'] = url('/back_to_tarnsaction'); // When Transaction was comleted
-          $transaction['cancel_url'] = url('/back_to_tarnsaction'); 
-
-            $transaction['payload'] = [
-                'foo' => [
-                    'bar' => 'baz'
-                ]
-              ];
-
-        //return CoinPayment::generatelink($transaction);
-              echo 'hello';
-
+    
+    public function airdropPage() {
+        return view('public.airdrop');
     }
+
 }

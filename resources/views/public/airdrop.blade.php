@@ -1,81 +1,123 @@
+<!doctype html>
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8">
-	<title>MDT AIR DROP</title>
-
-
-	<style type="text/css">
-		body {
-			width:520px;
-			margin:0; padding:0; border:0;
-			font-family: verdana;
-			background:url(repeat.png) repeat;
-			margin-bottom:10px;
-			}
-			p, h1 {width:450px; margin-left:50px; color:#FFF;}
-			p {font-size:11px;}
-
-			#container_notlike, #container_like {
-			    display:none
-			}
-	</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>MDT TOKEN AIDROP</title>
+ 
+<link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/airdrop.css')}}">
 </head>
 <body>
-<div id="fb-root"></div>
-<script src="http://connect.facebook.net/en_US/all.js"></script>
-<script>
-  FB.init({
-    appId  : '207659214596052',
-    status : true, 
-    cookie : true, 
-    xfbml  : true  
-  });
-</script>
+<div class="wrapper">
+      <a title="MDT" href="https://moderntoken.io" aria-current="page" class="hero-logo-mini mc hide-mobile w-inline-block w--current"><div>MDT</div></a>
+      <a href="#" class="wallet-connect disconnected"><img src="https://docs.metamask.io/metamask-fox.svg" alt="MetaMask Docs" class="logo"> <span class="wallet-status">Connect Wallet</span></a>
 
-<div id="container_notlike">
-YOU DONT LIKE
-</div>
+           <div class="hero beta">
+        <div class="hero-jumbo beta w-container">
+          <a title="MDT" href="" aria-current="page" class="hero-logo w-inline-block w--current">
+          </a>
+          <div class="hero-title xl">
+            <!-- <img src="TextBG.png" class="text-bg-img" /> -->
+            <!-- <strong class="kp-label">ElonDoge</strong> -->
+            <strong id="js-hero-line" class="inverse ">MDT </strong>
+          </div>
+          <p style="
+              opacity: 1;
+              transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1)
+                rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg);
+              transform-style: preserve-3d;
+            " class="p-hero txt-dark">
+              Power the vision, benefit from the MDT ecosystem.<br>
+              <small>Make intelligent, green living accessible.</small>
+          </p>
 
-<div id="container_like">
-YOU LIKE
-</div>
+          <div class="tags-top">
+            <strong class="tag-top">A total of 25M Tokens will be given away.</strong>
+            <strong class="tag-top">Be a part of MDT Ecosystem.</strong>
+            <strong class="tag-top">Start by getting a FREE 100 tokens.</strong>
+            
+          </div>
+          <div class="claim-token ">
+              <a class="btn claimbtn" >
+                CLAIM FREE TOKENS
+              </a>
 
+            </div>
+            <a class="thash" href="https://bscscan.com/tx" target="_blank"   style="margin-top: 20px;">Transaction Hash :  </a>
+            <small style="margin-top: 20px;">Note : You can only claim one time per wallet address. If you have claimed free tokens, please don't try claiming using same wallet address, you won't be receiving tokens and gas fee won't be refunded .</small>
+        </div>
 
+        <div class="bg-gradient"></div>
+        <div style="opacity: 1" class="fixed-topbg onscroll"></div>
+      </div>
+  
+  </div>
 
-
+<script src="https://cdn.jsdelivr.net/npm/web3@0.20.7/dist/web3.min.js" integrity="sha256-QBLUDyDq82B1cnZjAMn0hPdTo4Juu1S7/U1dgf22x8I=" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@metamask/detect-provider/dist/detect-provider.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script type="text/javascript">
-	$(document).ready(function(){
 
-    FB.login(function(response) {
-      if (response.session) {
+  <script type="text/javascript">
+    $(function() {
+      var abi = [{"constant":false,"inputs":[{"name":"amount","type":"uint256"}],"name":"claimTokens","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_maxAllowanceInclusive","type":"uint256"}],"name":"setMaxAllowance","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"isPaused","type":"bool"}],"name":"setPause","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[],"name":"widthrawTokens","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"inputs":[{"name":"_erc20ContractAddress","type":"address"},{"name":"_maxAllowanceInclusive","type":"uint256"}],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":false,"name":"requestor","type":"address"},{"indexed":false,"name":"amount","type":"uint256"}],"name":"GetTokens","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"owner","type":"address"},{"indexed":false,"name":"tokenAmount","type":"uint256"}],"name":"ReclaimTokens","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"setter","type":"address"},{"indexed":false,"name":"newState","type":"bool"},{"indexed":false,"name":"oldState","type":"bool"}],"name":"SetPause","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"setter","type":"address"},{"indexed":false,"name":"newState","type":"uint256"},{"indexed":false,"name":"oldState","type":"uint256"}],"name":"SetMaxAllowance","type":"event"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"claimedTokens","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"erc20Contract","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"maxAllowanceInclusive","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"}];
+         var deployedAddress = "0x2C10fE5D2d53E17BB4F53e56c27d47D62B62821b"  ;
 
-          var user_id = response.session.uid;
-          var page_id = "40796308305"; //coca cola
-          var fql_query = "SELECT uid FROM page_fan WHERE page_id = "+page_id+"and uid="+user_id;
-          var the_query = FB.Data.query(fql_query);
 
-          the_query.wait(function(rows) {
+        if (typeof window.ethereum !== 'undefined') {
+              console.log('MetaMask is installed!');
+              ethereum.request({ method: 'eth_requestAccounts' });
+              $('.claimbtn').addClass('connected');
+              $('.wallet-connect').addClass('connected-wallet');
+               $('.wallet-connect').removeClass('disconnected');
+              $('.wallet-status').html('Connected');
+          }
 
-              if (rows.length == 1 && rows[0].uid == user_id) {
-                  $("#container_like").show();
+         
+         if(ethereum.isConnected()) {
+              $('.claimbtn').removeClass('disconnected');
+              $('.claimbtn').addClass('connected');
+          } 
+        else {
+              $('.claimbtn').removeClass('connected');
+              $('.claimbtn').addClass('disconnected');
+              $('.wallet-connect').addClass('disconnected');
+              $('.wallet-connect').removeClass('connected-wallet');
+        }    
+        const ethereumButton = document.querySelector('.claimbtn');
 
-                  //here you could also do some ajax and get the content for a "liker" instead of simply showing a hidden div in the page.
-
-              } else {
-                  $("#container_notlike").show();
-                  //and here you could get the content for a non liker in ajax...
+        $('.claimbtn').click(function() {
+                if($(this).hasClass('connected')) {
+                    const amountToClaim = 100000000000000000000; // 100 MDT
+                    window.web3 = new Web3(web3.currentProvider);
+                    const contract = web3.eth.contract(abi).at(deployedAddress);
+                      
+                       web3.eth.defaultAccount=web3.eth.accounts[0];
+                       console.log(web3.eth.accounts);
+                      contract.claimTokens(amountToClaim,function (err, success) {
+                      
+                      if(success) {
+                          $('.thash').attr('href','https://bscscan.com/tx/'+success);
+                          $('.thash').html('Transaction hash : '+ success);
+                          $('.thash').fadeIn();
+                          $('.claimbtn').html('Claimed');
+                          $('.claimbtn').attr('disabled',true);
+                          $('.claimbtn').removeClass('connected');
+                          $('.claimbtn').css({ 'background-color' : '#f6fba2','background-image' :  'linear-gradient(315deg, #f6fba2 0%, #20ded3 74%)' });
+                      }
+                   });
               }
+              else {
+                   //alert('Please connect MetaMask');
+              }
+            
           });
-
-
-      } else {
-        // user is not logged in
-      }
-    });
-
-});
-</script>
-</body>
+        $('.wallet-connect').click(function(){
+              ethereum.request({ method: 'eth_requestAccounts' });
+              $('.claimbtn').addClass('connected');
+        });
+      });
+  </script>
+  </body>
 </html>

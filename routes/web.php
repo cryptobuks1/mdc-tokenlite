@@ -16,6 +16,7 @@ if(application_installed()){
 }
 
 // Handle Main / Route
+ Route::get('/airdrop','PublicController@airdropPage')->name('airdrop');
 Route::get('/home', 'PublicController@homePage')->name('homepage');
 Route::get('/', 'Auth\LoginController@checkLoginState')->name('home');
 Route::get('/locale', 'PublicController@set_lang')->name('language');
@@ -195,6 +196,8 @@ Route::name('public.')->group(function () {
     })->name('white.paper');
 
     Route::get('/{slug}', 'PublicController@site_pages')->name('pages');
+
+   
    
 });
 
@@ -204,5 +207,5 @@ Route::prefix('ajax')->name('ajax.')->group(function () {
 });
 
 
-Route::get('paynow','PublicController@payNow')->name('paynow');
+
 
