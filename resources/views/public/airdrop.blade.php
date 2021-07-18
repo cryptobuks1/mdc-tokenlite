@@ -5,11 +5,26 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>MDT TOKEN AIDROP</title>
- 
+ <meta name="description" content="Power the vision, benefit from the MDT ecosystem.Make intelligent, green living accessible.">
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://app.moderntoken.io/airdrop">
+<meta property="og:title" content="MDT TOKEN AIDROP">
+<meta property="og:description" content="Power the vision, benefit from the MDT ecosystem.Make intelligent, green living accessible.">
+<meta property="og:image" content="">
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:url" content="https://app.moderntoken.io/airdrop">
+<meta property="twitter:title" content="MDT TOKEN AIDROP">
+<meta property="twitter:description" content="Power the vision, benefit from the MDT ecosystem.Make intelligent, green living accessible.">
+<meta property="twitter:image" content="">
 <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/airdrop.css')}}">
 </head>
 <body>
+  <div class="lds-dual-ring"></div>
 <div class="wrapper">
       <a title="MDT" href="https://moderntoken.io" aria-current="page" class="hero-logo-mini mc hide-mobile w-inline-block w--current"><div>MDT</div></a>
       <a href="#" class="wallet-connect disconnected"><img src="https://docs.metamask.io/metamask-fox.svg" alt="MetaMask Docs" class="logo"> <span class="wallet-status">Connect Wallet</span></a>
@@ -60,6 +75,16 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
   <script type="text/javascript">
+      const provider =  detectEthereumProvider();
+
+      if (provider) {
+        // From now on, this should always be true:
+        // provider === window.ethereum
+        //startApp(provider); // initialize your app
+        console.log('Okay pa');
+      } else {
+        console.log('Please install MetaMask!');
+      }
     $(function() {
       var abi = [{"constant":false,"inputs":[{"name":"amount","type":"uint256"}],"name":"claimTokens","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_maxAllowanceInclusive","type":"uint256"}],"name":"setMaxAllowance","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"isPaused","type":"bool"}],"name":"setPause","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[],"name":"widthrawTokens","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"inputs":[{"name":"_erc20ContractAddress","type":"address"},{"name":"_maxAllowanceInclusive","type":"uint256"}],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":false,"name":"requestor","type":"address"},{"indexed":false,"name":"amount","type":"uint256"}],"name":"GetTokens","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"owner","type":"address"},{"indexed":false,"name":"tokenAmount","type":"uint256"}],"name":"ReclaimTokens","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"setter","type":"address"},{"indexed":false,"name":"newState","type":"bool"},{"indexed":false,"name":"oldState","type":"bool"}],"name":"SetPause","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"setter","type":"address"},{"indexed":false,"name":"newState","type":"uint256"},{"indexed":false,"name":"oldState","type":"uint256"}],"name":"SetMaxAllowance","type":"event"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"claimedTokens","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"erc20Contract","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"maxAllowanceInclusive","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"}];
          var deployedAddress = "0x2C10fE5D2d53E17BB4F53e56c27d47D62B62821b"  ;
@@ -72,6 +97,10 @@
               $('.wallet-connect').addClass('connected-wallet');
                $('.wallet-connect').removeClass('disconnected');
               $('.wallet-status').html('Connected');
+              $('.lds-dual-ring').hide();
+          }
+          else {
+              alert('META MASK WALLET IS REQUIRED');
           }
 
          
@@ -80,6 +109,7 @@
               $('.claimbtn').addClass('connected');
           } 
         else {
+
               $('.claimbtn').removeClass('connected');
               $('.claimbtn').addClass('disconnected');
               $('.wallet-connect').addClass('disconnected');
@@ -88,7 +118,7 @@
         const ethereumButton = document.querySelector('.claimbtn');
 
         $('.claimbtn').click(function() {
-                if($(this).hasClass('connected')) {
+             
                     const amountToClaim = 100000000000000000000; // 100 MDT
                     window.web3 = new Web3(web3.currentProvider);
                     const contract = web3.eth.contract(abi).at(deployedAddress);
@@ -107,17 +137,15 @@
                           $('.claimbtn').css({ 'background-color' : '#f6fba2','background-image' :  'linear-gradient(315deg, #f6fba2 0%, #20ded3 74%)' });
                       }
                    });
-              }
-              else {
-                   //alert('Please connect MetaMask');
-              }
+              // }
+              // else {
+              //      //alert('Please connect MetaMask');
+              // }
             
           });
-        $('.wallet-connect').click(function(){
-              ethereum.request({ method: 'eth_requestAccounts' });
-              $('.claimbtn').addClass('connected');
-        });
+       
       });
+
   </script>
   </body>
 </html>
