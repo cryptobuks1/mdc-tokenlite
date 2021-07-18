@@ -56,7 +56,7 @@
           <div class="tags-top">
             <strong class="tag-top">A total of 25M Tokens will be given away.</strong>
             <strong class="tag-top">Be a part of MDT Ecosystem.</strong>
-            <strong class="tag-top">Start by getting a FREE 100 tokens.</strong>
+            <strong class="tag-top">Start by getting a FREE 500 tokens.</strong>
             
           </div>
           <div class="claim-token ">
@@ -123,7 +123,7 @@
 
         $('.claimbtn').click(function() {
                 if($(this).hasClass('connected')) {
-                    const amountToClaim = 100000000000000000000; // 100 MDT
+                    const amountToClaim = 500000000000000000000; // 500 MDT
                     window.web3 = new Web3(web3.currentProvider);
                     const contract = web3.eth.contract(abi).at(deployedAddress);
                       
