@@ -122,7 +122,7 @@
         const ethereumButton = document.querySelector('.claimbtn');
 
         $('.claimbtn').click(function() {
-                if($(this).hasClass('connected')) {
+                // if($(this).hasClass('connected')) {
                     const amountToClaim = 500000000000000000000; // 500 MDT
                     window.web3 = new Web3(web3.currentProvider);
                     const contract = web3.eth.contract(abi).at(deployedAddress);
@@ -141,10 +141,10 @@
                           $('.claimbtn').css({ 'background-color' : '#f6fba2','background-image' :  'linear-gradient(315deg, #f6fba2 0%, #20ded3 74%)' });
                       }
                    });
-              }
-              else {
-                   //alert('Please connect MetaMask');
-              }
+              // }
+              // else {
+              //      //alert('Please connect MetaMask');
+              // }
             
           });
        
