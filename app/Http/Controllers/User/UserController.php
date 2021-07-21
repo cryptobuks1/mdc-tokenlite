@@ -729,5 +729,17 @@ public function addBonus($tokens,$downline_id,$base_rate) {
 
 
  }
+public function airdropPage() {
+    
+    $check = User::find(Auth::id());
+        if ($check && !isset($check->kyc_info->status)) {
+                return redirect(route('user.kyc'))->with(['warning' => __('messages.kyc.mandatory')]);
+        } else {
+                if ($check->kyc_info->status != 'approved') {
+                    return redirect(route('user.kyc.application'))->with(['warning' => __('messages.kyc.mandatory')]);
+                }
+        }
+        return view('public.airdrop');
+    }
 
 }

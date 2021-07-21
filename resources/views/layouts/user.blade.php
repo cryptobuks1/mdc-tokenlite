@@ -77,7 +77,7 @@
                         @if(gws('user_mytoken_page') == 1)
                         <li><a href="{{ route('user.token.balance') }}"><em class="ikon ikon-my-token"></em> {{ __('Token Balance') }}</a></li>
                         @endif
-                       <!--  <li><a href="{{ route('user.token.airdrop') }}"><em class="ikon ikon-coins"></em> {{ __('Token Airdrop') }}</a></li> -->
+                        <li><a href="{{ route('user.airdrop') }}" target="_blank"><em class="ikon ikon-coins"></em> {{ __('Token Airdrop') }}</a></li>
                         @if(gws('main_website_url') != NULL)
                         <li><a href="{{gws('main_website_url')}}" target="_blank"><em class="ikon ikon-home-link"></em> {{__('Main Site')}}</a></li>
                         @endif
