@@ -204,8 +204,6 @@ class PublicController extends Controller
         return redirect()->route('register');
     }
     
-    public function airdropPage() {
-        return view('public.airdrop');
-    }
+  
 
 }

@@ -16,7 +16,7 @@ if(application_installed()){
 }
 
 // Handle Main / Route
- Route::get('/airdrop','PublicController@airdropPage')->name('airdrop');
+
 Route::get('/home', 'PublicController@homePage')->name('homepage');
 Route::get('/', 'Auth\LoginController@checkLoginState')->name('home');
 Route::get('/locale', 'PublicController@set_lang')->name('language');
@@ -73,8 +73,8 @@ Route::prefix('user')->middleware(['auth', 'user', 'verify_user', 'g2fa'])->name
 
 
     // Airdrop
-    Route::get('/account/airdrop', 'User\UserController@airdrop')->name('token.airdrop');
-
+  
+     Route::get('/airdrop','User\UserController@airdropPage')->name('airdrop');
     // User Ajax Request
     Route::name('ajax.')->prefix('ajax')->group(function () {
         Route::post('/account/wallet-form', 'User\UserController@get_wallet_form')->name('account.wallet');
