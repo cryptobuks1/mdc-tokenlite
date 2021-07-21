@@ -10,16 +10,16 @@
 <!-- Open Graph / Facebook -->
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://app.moderntoken.io/airdrop">
-<meta property="og:title" content="MDT TOKEN AIDROP">
+<meta property="og:title" content="MDT TOKEN AIRDROP">
 <meta property="og:description" content="Power the vision, benefit from the MDT ecosystem.Make intelligent, green living accessible.">
-<meta property="og:image" content="">
+<meta property="og:image" content="https://static.wixstatic.com/media/9d58af_47cf0ec976554dc6b95b5eb4d93271f1~mv2.png/v1/crop/x_60,y_360,w_1020,h_372/fill/w_340,h_124,al_c,q_85,usm_0.66_1.00_0.01/MDT%20Logo%20hor.webp">
 
 <!-- Twitter -->
 <meta property="twitter:card" content="summary_large_image">
 <meta property="twitter:url" content="https://app.moderntoken.io/airdrop">
 <meta property="twitter:title" content="MDT TOKEN AIRDROP">
 <meta property="twitter:description" content="Power the vision, benefit from the MDT ecosystem.Make intelligent, green living accessible.">
-<meta property="twitter:image" content="">
+<meta property="twitter:image" content="https://static.wixstatic.com/media/9d58af_47cf0ec976554dc6b95b5eb4d93271f1~mv2.png/v1/crop/x_60,y_360,w_1020,h_372/fill/w_340,h_124,al_c,q_85,usm_0.66_1.00_0.01/MDT%20Logo%20hor.webp">
 <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/airdrop.css')}}">
 </head>
@@ -91,7 +91,7 @@
             if (provider) {
             
             } else {
-              console.log('Please install MetaMask!');
+               console.log('Please install MetaMask!');
             }
         if (typeof window.ethereum !== 'undefined') {
               console.log('MetaMask is installed!');
@@ -107,7 +107,6 @@
               $('.metamask-wrapper').css('display','flex');
           }
 
-         
          if(ethereum.isConnected()) {
               $('.claimbtn').removeClass('disconnected');
               $('.claimbtn').addClass('connected');
