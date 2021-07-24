@@ -631,8 +631,7 @@ class UserPanel
                                                 'apr'    => '12'
                                             ],
                           ];
-
-            return $token_staking[$staking_tenure] ;
+            return (!empty($staking_tenure)) ? $token_staking[$staking_tenure]  : '';
 
     }
 }

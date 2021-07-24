@@ -59,7 +59,7 @@ $decimal_max = (token('decimal_max')) ? token('decimal_max') : 0;
                 <div class="row guttar-15px">
                     @foreach($pm_currency as $gt => $full)
                     @if(token('purchase_'.$gt) == 1 || $method==$gt)
-                     @if(in_array($gt,['bnb','btc','trx','xrp']))
+                     @if(in_array($gt,['bnb','btc','trx','xrp','usd']))
                     <div class="col-6{{ (($is_price_show!=1) ? ' col-sm-3' : '' ) }}">
                         <div class="payment-item pay-option">
                             <input class="pay-option-check pay-method" type="radio" id="pay{{ $gt }}" name="paymethod" value="{{ $gt }}" {{ $default_method == strtoupper($gt) ? 'checked' : '' }}>

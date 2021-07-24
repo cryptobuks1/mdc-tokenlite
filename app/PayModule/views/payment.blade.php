@@ -5,6 +5,7 @@ if ($data->total_bonus > 0) {
     $dot_1 =  ''; $dot_2 = '.';
 }
 @endphp
+
 <a href="#" class="modal-close" data-dismiss="modal"><em class="ti ti-close"></em></a>
 <div class="popup-body">
     <div class="popup-content">
