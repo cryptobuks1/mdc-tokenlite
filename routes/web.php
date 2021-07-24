@@ -20,6 +20,7 @@ if(application_installed()){
 Route::get('/home', 'PublicController@homePage')->name('homepage');
 Route::get('/', 'Auth\LoginController@checkLoginState')->name('home');
 Route::get('/locale', 'PublicController@set_lang')->name('language');
+Route::get('/token-sale-progress','PublicController@tokenSaleProgress')->name('token-sale-progress');
 
 // Authenticates Routes
 Route::get('/auth/{service}', 'Auth\SocialAuthController@redirect')->name('social.login');
