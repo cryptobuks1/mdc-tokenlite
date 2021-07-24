@@ -203,6 +203,11 @@ class PublicController extends Controller
         }
         return redirect()->route('register');
     }
+
+    public function tokenSaleProgress() {
+
+          return view('public.token-sale');
+    }
     
   
 
