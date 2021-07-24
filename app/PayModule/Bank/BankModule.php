@@ -173,22 +173,40 @@ class BankModule implements PmInterface
 
 
             // TOKEN STAKING DATA
-            $stakedstatus = $request->input('stakestatus');
-            $staking_tenure = $request->input('staketenure');
+            // $stakedstatus = $request->input('stakestatus');
+            // $staking_tenure = $request->input('staketenure');
             
-            $stakedTenureData =UserPanel::token_staking($staking_tenure);
-            $staked_data = [
-                'user_id' => Auth::id(),
-                'txn_id' => $trnxId,
-                'staking_tenure'   =>  $staking_tenure ,
-                'token_staked'   => $request->input('stakedamount'),
-                'date_staked'    => Carbon::now()->toDateTimeString(),
-                'staking_receiving_date'  => Carbon::now()->addMonths($stakedTenureData['tenure']),
-                'status'   => 0
-            ];
+            // $stakedTenureData =UserPanel::token_staking($staking_tenure);
+            // $staked_data = [
+            //     'user_id' => Auth::id(),
+            //     'txn_id' => $trnxId,
+            //     'staking_tenure'   =>  $staking_tenure ,
+            //     'token_staked'   => $request->input('stakedamount'),
+            //     'date_staked'    => Carbon::now()->toDateTimeString(),
+            //     'staking_receiving_date'  => Carbon::now()->addMonths($stakedTenureData['tenure']),
+            //     'status'   => 0
+            // ];
+
+
+             $stakedstatus = $request->input('stakestatus');
+            $staking_tenure = $request->input('staketenure');
             if( $stakedstatus == 'enabled' && !empty($staking_tenure)) {
+                    $stakedTenureData =UserPanel::token_staking($staking_tenure);
+                    $staked_data = [
+                        'user_id' => Auth::id(),
+                        'txn_id' => $trnxId,
+                        'staking_tenure'   =>  $staking_tenure ,
+                        'token_staked'   => $request->input('stakedamount'),
+                        'date_staked'    => Carbon::now()->toDateTimeString(),
+                        'staking_receiving_date'  => Carbon::now()->addMonths($stakedTenureData['tenure']),
+                        'status'   => 0
+                    ];
+          
                     TokenStaked::insert($staked_data) ;
             }
+            // if( $stakedstatus == 'enabled' && !empty($staking_tenure)) {
+            //         TokenStaked::insert($staked_data) ;
+            // }
             // END TOKEN STAKING DATA
 
 
