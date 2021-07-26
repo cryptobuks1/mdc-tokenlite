@@ -102,7 +102,9 @@
                $('.wallet-connect').removeClass('disconnected');
               $('.wallet-status').html('Connected');
               $('.lds-dual-ring').hide();
-          }
+
+               
+                    }
           else {
               alert('METAMASK WALLET IS REQUIRED');
               $('.metamask-wrapper').css('display','flex');
