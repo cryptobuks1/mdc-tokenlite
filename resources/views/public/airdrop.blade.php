@@ -22,6 +22,7 @@
 <meta property="twitter:image" content="https://static.wixstatic.com/media/9d58af_47cf0ec976554dc6b95b5eb4d93271f1~mv2.png/v1/crop/x_60,y_360,w_1020,h_372/fill/w_340,h_124,al_c,q_85,usm_0.66_1.00_0.01/MDT%20Logo%20hor.webp">
 <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/airdrop.css')}}">
+<link rel="shortcut icon" href="https://app.moderntoken.io/assets/images/logo.png" />
 </head>
 <body>
   <div class="metamask-wrapper">
