@@ -16,7 +16,9 @@ if(application_installed()){
 }
 
 // Handle Main / Route
-
+Route::get('add-token-metamask',function() {
+  return view('public.add-token');
+});
 Route::get('/home', 'PublicController@homePage')->name('homepage');
 Route::get('/', 'Auth\LoginController@checkLoginState')->name('home');
 Route::get('/locale', 'PublicController@set_lang')->name('language');
