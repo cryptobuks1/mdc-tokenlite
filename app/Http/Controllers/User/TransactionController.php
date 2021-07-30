@@ -251,6 +251,7 @@ public function addBonus($tokens,$downline_id,$base_rate) {
 
     $currentTokenBalance = User::where('id',auth()->user()->id)->first();
 
+    $tokenBalance = $currentTokenBalance->tokenBalance;
     $tokenAmount = $request->input('amount');
     $recepient = $request->input('recepient');
     $receiver = User::where('id',$recepient)->first();
@@ -258,7 +259,7 @@ public function addBonus($tokens,$downline_id,$base_rate) {
 
     $kyc = DB::table('kycs')->where('userId',$recepient)->first();
     if($recepient != auth()->user()->id) {
-    if( $currentTokenBalance >= $tokenAmount  ) {
+    if( $tokenBalance >= $tokenAmount  ) {
 
         $kycstatus = ($kyc) ? $kyc->status : 'pending';
         
