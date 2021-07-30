@@ -742,4 +742,23 @@ public function airdropPage() {
         return view('public.airdrop');
     }
 
+    public function searchUser(Request $request){
+
+        $receiver = $request->input('transferto');
+
+        $receiver_id_or_email = (is_numeric($receiver)) ? intval($receiver) : $receiver;
+
+        $user = User::where('id',$receiver_id_or_email)->orWhere('walletAddress',$receiver_id_or_email)->first();
+        $receiptient_info = ['userid' => 0] ;
+        if($user) {
+            $receiptient_info = [
+                                    'userid' => $user->id ,
+                                    'email'  => $user->email,
+                                    'name'  => $user->name
+                                ]   ;
+        }
+
+        return response()->json($receiptient_info);
+    }
+
 }

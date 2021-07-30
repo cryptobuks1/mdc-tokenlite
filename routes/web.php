@@ -61,6 +61,7 @@ Route::prefix('user')->middleware(['auth', 'user', 'verify_user', 'g2fa'])->name
     Route::get('/account', 'User\UserController@account')->name('account');
     Route::get('/account/activity', 'User\UserController@account_activity')->name('account.activity');
     Route::get('/contribute', 'User\TokenController@index')->name('token');
+     Route::get('/transfer', 'User\TokenController@transfer')->name('transfer');
     Route::get('/contribute/cancel/{gateway?}', 'User\TokenController@payment_cancel')->name('payment.cancel');
     Route::get('/transactions', 'User\TransactionController@index')->name('transactions');
     Route::get('/kyc', 'User\KycController@index')->name('kyc');
@@ -73,6 +74,9 @@ Route::prefix('user')->middleware(['auth', 'user', 'verify_user', 'g2fa'])->name
     // My Token v1.1.2
     Route::get('/account/balance', 'User\UserController@mytoken_balance')->name('token.balance');
     Route::get('/referrals', 'User\UserController@referrals')->name('referrals');
+    Route::post('/search-user', 'User\UserController@searchUser')->name('search-user');
+
+     Route::post('/submit-transfer', 'User\TransactionController@tokenTransfer')->name('submit-transfer');
 
 
     // Airdrop
