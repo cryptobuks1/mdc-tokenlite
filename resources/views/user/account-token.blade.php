@@ -41,7 +41,11 @@ $TST = $token_stages;
                         </div>
                     </div>
                     <div class="col-md-4 text-md-right">
+
                         <a href="{{ route('user.token') }}" class="btn btn-primary">{{ __('Buy More Token') }}</a>
+                            <hr>
+                         <a href="{{ route('user.transfer') }}" class="btn btn-primary">{{ __('Transfer Token') }}</a>
+                        
                     </div>
                 </div>
             </div>
@@ -76,7 +80,7 @@ $TST = $token_stages;
                         @endif
                         @if($TAC->has_transfer)
                         <li>
-                            <span class="total-title-xs">{{ __('Transfer Token') }}</span>
+                            <span class="total-title-xs">{{ __('Transferred Token') }}</span>
                             <span class="total-amount-sm">{{ to_num_token($TAC->transfer).' '.$symbol }}</span>
                         </li>
                         @endif

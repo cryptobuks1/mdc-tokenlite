@@ -23,6 +23,7 @@ use App\Models\TokenStaked;
 use App\Models\Setting;
 use App\Helpers\TokenCalculate as TC;
 use App\Models\MatrixDownline;
+use App\Models\User;
 use DB;
 class TransactionController extends Controller
 {
@@ -49,6 +50,7 @@ class TransactionController extends Controller
         $bonuses   = Transaction::get_by_own(['tnx_type' => 'bonus'])->get()->count();
         $refunds   = Transaction::get_by_own(['tnx_type' => 'refund'])->get()->count();
         $bounty   = Transaction::get_by_own(['tnx_type' => 'bounty'])->get()->count();
+
         $has_trnxs = (object) [
             'transfer' => ($transfers > 0) ? true : false,
             'referral' => ($referrals > 0) ? true : false,
@@ -238,8 +240,148 @@ public function addBonus($tokens,$downline_id,$base_rate) {
     }
 
  }
- public function referralTransaction(Request $request){
+ 
+ public function tokenTransfer(Request $request) {
+    $tc = new TC();
+
+    $message = [
+                    'message_type' => 'info' ,
+                    'message'      => 'Transfer token'
+            ];
+
+    $currentTokenBalance = User::where('id',auth()->user()->id)->first();
+
+    $tokenAmount = $request->input('amount');
+    $recepient = $request->input('recepient');
+    $receiver = User::where('id',$recepient)->first();
+    $stage = active_stage();
+
+    $kyc = DB::table('kycs')->where('userId',$recepient)->first();
+    if($recepient != auth()->user()->id) {
+    if( $currentTokenBalance >= $tokenAmount  ) {
+
+        $kycstatus = ($kyc) ? $kyc->status : 'pending';
         
+        if( $kycstatus != 'approved') {
+
+                  $message = [
+                    'message_type' => 'error' ,
+                    'message'      => 'Recipient must be KYC verified'
+            ]; 
+
+        }
+        else {
+
+        $tnx_type = 'transfer';
+        $currency = 'usd';
+        $base_rate = 0.1;
+        $currency_rate = Setting::exchange_rate($tc->get_current_price(), $currency);
+        $base_currency = strtolower(base_currency());
+        $base_currency_rate = Setting::exchange_rate($tc->get_current_price(), $base_currency);
+        $all_currency_rate = json_encode(Setting::exchange_rate($tc->get_current_price(), 'except'));
+         $added_time = Carbon::now()->toDateTimeString();
+         $tnx_date   = date('Y-m-d').' '.date('H:i');
+          $amount_in_usd = $tokenAmount * $base_rate ;
+         $sender_data = [
+            'created_at' => $added_time,
+            'tnx_id' => set_id(rand(100, 999), 'trnx'),
+            'tnx_type' => $tnx_type,
+            'tnx_time' => $added_time,
+            'tokens' => $tokenAmount,
+            'bonus_on_base' => 0,
+            'bonus_on_token' => 0,
+            'total_bonus' => 0,
+            'total_tokens' => $tokenAmount,
+            'stage' =>  1,
+            'user' => auth()->user()->id,
+            'amount' => $amount_in_usd,
+            'receive_amount' => $amount_in_usd,
+            'receive_currency' => 'usd',
+            'base_amount' => $amount_in_usd,
+            'base_currency' => $base_currency,
+            'base_currency_rate' => $base_currency_rate,
+            'currency' => $currency,
+            'currency_rate' => $currency_rate,
+            'all_currency_rate' => $all_currency_rate,
+            'payment_method' => 'system',
+            'payment_to' =>  $receiver->walletAddress,
+            'payment_id' => rand(1000, 9999),
+            'details' =>'Token transfer to ' . $receiver->name,
+            'status' => 'approved',
+            'extra'  => 'sent'
+        ];
+        $receiver_data = [
+            'created_at' => $added_time,
+            'tnx_id' => set_id(rand(100, 999), 'trnx'),
+            'tnx_type' => $tnx_type,
+            'tnx_time' => $added_time,
+            'tokens' => $tokenAmount,
+            'bonus_on_base' => 0,
+            'bonus_on_token' => 0,
+            'total_bonus' => 0,
+            'total_tokens' => $tokenAmount,
+            'stage' =>  1,
+            'user' => $recepient,
+            'amount' => $amount_in_usd,
+            'receive_amount' => $amount_in_usd,
+            'receive_currency' => 'usd',
+            'base_amount' => $amount_in_usd,
+            'base_currency' => $base_currency,
+            'base_currency_rate' => $base_currency_rate,
+            'currency' => $currency,
+            'currency_rate' => $currency_rate,
+            'all_currency_rate' => $all_currency_rate,
+            'payment_method' => 'system',
+            'payment_to' => auth()->user()->walletAddress,
+            'payment_id' => rand(1000, 9999),
+            'details' =>'Token transfer from' . auth()->user()->name,
+            'status' => 'approved',
+        ];
+        if($receiver) {
+                DB::table('users')->where('id',auth()->user()->id)->decrement('tokenBalance',$tokenAmount + 0);
+                DB::table('transactions')->insert($sender_data);
+
+                DB::table('users')->where('id',$recepient)->increment('tokenBalance',$tokenAmount + 0);
+                DB::table('transactions')->insert($receiver_data);
+
+                 $message = [
+                            'message_type' => 'success' ,
+                            'message'      => $tokenAmount . 'MDT has been successfully transferred' 
+                ];
+        }
+        else {
+
+                   $message = [
+                            'message_type' => 'error' ,
+                            'message'      => 'Unknown receiver'
+                ];
+
+        }
+
+    }
+       
+
+    }
+    else {
+
+        $message = [
+                    'message_type' => 'error' ,
+                    'message'      => 'Not enough remaining token balance'
+            ]; 
+    }
+
+    }
+    else {
+             $message = [
+                    'message_type' => 'info' ,
+                    'message'      => 'Transaction not recorded. You are only sending to yourself'
+            ]; 
+    }
+
+
+    return response()->json($message);
+
+
  }
 
 }

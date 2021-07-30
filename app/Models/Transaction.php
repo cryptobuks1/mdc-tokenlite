@@ -512,7 +512,7 @@ class Transaction extends Model
                 'has_withdraw'  => ($user_wd->count() > 0) ? true : false,
                 'withdraw'      => $user_wd->where('status', 'approved')->sum('total_tokens'),
                 'has_transfer'  => ($user_tf->count() > 0) ? true : false,
-                'transfer'      => $user_tf->where('status', 'approved')->sum('tokens'),
+                'transfer'      => $user_tf->where('status', 'approved')->where('extra', 'sent')->sum('tokens'),
                 'pending'       => ($wd_pending + $ts_pending)
             ];
             return $balance_sum; 
