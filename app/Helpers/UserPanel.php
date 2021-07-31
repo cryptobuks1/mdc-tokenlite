@@ -85,7 +85,7 @@ class UserPanel
             $tier = 'SILVER';
         }
         else if($contributed >= 1000 &&  $contributed <= 3000) {
-                 $tier = 'SILVER';
+                 $tier = 'GOLD';
         }
          else if($contributed >= 3000) {
                  $tier = 'PLATINUM';
