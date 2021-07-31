@@ -14,6 +14,7 @@
 namespace App\Helpers;
 
 use DB;
+use App\Models\User;
 
 /**
  * UserPanel Class
@@ -50,6 +51,7 @@ class UserPanel
         return $return;
     }
 
+
     /**
      * user_balance()
      *
@@ -66,10 +68,36 @@ class UserPanel
         $g_id = ($id) ? ' id="' . $id . '"' : '';
         $g_cls = ($class) ? css_class($class) : '';
 
+
+        $userData = User::find(auth()->user()->id);
+      
+        $contributed = $userData->contributed;
+
+       
+        $tier = ' <small>n/a <a href="https://www.moderndevelopmenttoken.com/whitepaper" target="_blank">View MDT Membership Tier</a></small> ' ;
+        if($contributed < 500) {
+             $lacking_amount = 500 -  $contributed;
+              $tier = '<small> Not Qualified </small>';
+
+        }
+        else if($contributed >= 500 &&  $contributed < 1000) {
+
+            $tier = 'SILVER';
+        }
+        else if($contributed >= 1000 &&  $contributed <= 3000) {
+                 $tier = 'SILVER';
+        }
+         else if($contributed >= 3000) {
+                 $tier = 'PLATINUM';
+        }
+
         $return = '<div' . $g_id . ' class="user-status' . $g_cls . '">
         <h6 class="text-white">'.$user->email.' <small class="text-white-50">('.set_id($user->id).')</small></h6>
         <h6 class="user-status-title">' . __('Token balance') . '</h6>
         <div class="user-status-balance">' . to_num_token($user->tokenBalance) . ' <small>' . token('symbol') . '</small></div>
+         <hr>
+         <h6 class="user-status-title">' . __('Membership Tier') . '</h6>
+         <div class="user-status-balance">'.$tier.'</div>
         </div>';
 
         return $return;
@@ -634,4 +662,5 @@ class UserPanel
             return (!empty($staking_tenure)) ? $token_staking[$staking_tenure]  : '';
 
     }
+   
 }
