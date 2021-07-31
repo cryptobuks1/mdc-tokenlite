@@ -31,6 +31,9 @@ $base_currency = base_currency();
                 </div>
             </div>
         </div>
+    
+       
+     
          <div class="col-md-6">
             <div class="card content-welcome-block card-full-height">
              <div class="card-innr">
@@ -69,7 +72,7 @@ $base_currency = base_currency();
           </div>
 
         </div>
-       
+    
 
                       @if(get_page('home_top', 'status') == 'active')
                       <div class="col-12 col-lg-7">
