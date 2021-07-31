@@ -34,6 +34,7 @@ use App\Models\MatrixDownline;
 use DB;
 use CoinpaymentsAPI;
 use App\Models\Setting;
+use App\Models\PaymentMethod;
 
 class UserController extends Controller
 {
@@ -759,6 +760,35 @@ public function airdropPage() {
         }
 
         return response()->json($receiptient_info);
+    }
+
+    public function transfer() {
+
+        $stage = active_stage();
+        $tc = new TC();
+        $currencies = Setting::active_currency();
+        $currencies['base'] = base_currency();
+        $bonus = $tc->get_current_bonus(null);
+        $bonus_amount = $tc->get_current_bonus('amount');
+        $price = Setting::exchange_rate($tc->get_current_price());
+        $minimum = $tc->get_current_price('min');
+        $active_bonus = $tc->get_current_bonus('active');
+        $pm_currency = PaymentMethod::Currency;
+        $pm_active = PaymentMethod::where('status', 'active')->get();
+        $token_prices = $tc->calc_token(1, 'price');
+        $is_price_show = token('price_show');
+        $contribution = Transaction::user_contribution();
+
+        $check = User::find(Auth::id());
+        if ($check && !isset($check->kyc_info->status)) {
+                return redirect(route('user.kyc'))->with(['warning' => __('messages.kyc.mandatory')]);
+        } else {
+                if ($check->kyc_info->status != 'approved') {
+                    return redirect(route('user.kyc.application'))->with(['warning' => __('messages.kyc.mandatory')]);
+                }
+        }
+       
+        return view('user.transfer', compact('stage', 'currencies', 'bonus', 'bonus_amount', 'price', 'token_prices', 'is_price_show', 'minimum', 'active_bonus', 'pm_currency', 'contribution'));
     }
 
 }
