@@ -32,7 +32,7 @@ $TST = $token_stages;
                     <div class="col-md-8">
                         <div class="total-block">
                             <h6 class="total-title ucap">{{ __('Token Balance') }}</h6>
-                            <span class="total-amount-lead">{{ to_num_token($TAC->current).' '.$symbol }}
+                            <span class="total-amount-lead">{{ to_num_token($TAC->current ,'max').' '.$symbol }}
                                 @if($TAC->pending > 0)
                                 <em class="align-middle fas fa-info-circle fs-12 text-light" data-toggle="tooltip" data-placement="right" title="{{ __('+:amount :symbol Pending Request', ['amount' => to_num_token($TAC->pending), 'symbol' => $symbol]) }}"></em>
                                 @endif
@@ -53,7 +53,7 @@ $TST = $token_stages;
             <div class="card-innr">
                 <div class="total-block">
                     <h5 class="total-title-sm">{{ __('Total Tokens') }}</h5>
-                    <span class="total-amount">{{ to_num_token($TAC->total).' '.$symbol }}</span>
+                    <span class="total-amount">{{ to_num_token($TAC->total ).' '.$symbol }}</span>
                 </div>
                 <div class="total-block">
                     <ul class="list total-wg">
