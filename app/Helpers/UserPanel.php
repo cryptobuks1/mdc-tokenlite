@@ -94,7 +94,7 @@ class UserPanel
         $return = '<div' . $g_id . ' class="user-status' . $g_cls . '">
         <h6 class="text-white">'.$user->email.' <small class="text-white-50">('.set_id($user->id).')</small></h6>
         <h6 class="user-status-title">' . __('Token balance') . '</h6>
-        <div class="user-status-balance">' . to_num_token($user->tokenBalance) . ' <small>' . token('symbol') . '</small></div>
+        <div class="user-status-balance">' . to_num_token($user->tokenBalance,'max') . ' <small>' . token('symbol') . '</small></div>
          <hr>
          <h6 class="user-status-title">' . __('Membership Tier') . '</h6>
          <div class="user-status-balance">'.$tier.'</div>
@@ -145,7 +145,7 @@ class UserPanel
         $return = '<div' . $g_id . ' class="token-statistics card card-token' . $g_cls . '">
         <div class="card-innr"><div class="token-balance' . $ver_cls . '">' . $ver_icon . '
         <div class="token-balance-text"><h6 class="card-sub-title">' . __('Token Balance') . '</h6>
-        <span class="lead">' . to_num_token($user->tokenBalance) . ' <span>' . token('symbol') . ' <em class="fas fa-info-circle fs-11" data-toggle="tooltip" data-placement="right" title="Equivalent to '.token_price($user->tokenBalance, base_currency()).' '.base_currency(true).'"></em></span></span>
+        <span class="lead">' . to_num_token($user->tokenBalance,'max') . ' <span>' . token('symbol') . ' <em class="fas fa-info-circle fs-11" data-toggle="tooltip" data-placement="right" title="Equivalent to '.token_price($user->tokenBalance, base_currency()).' '.base_currency(true).'"></em></span></span>
         </div>
         </div>' . $contribute . '</div></div>';
 
