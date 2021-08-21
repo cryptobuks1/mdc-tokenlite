@@ -4,6 +4,13 @@
 @php 
 $base_cur = base_currency();
 @endphp
+<style type="text/css">
+    .token-balance-s3{
+        display: flex;
+            align-items: flex-end;
+            column-gap: 25%;
+    }
+</style>
 <div class="page-content">
 	<div class="container">
         @include('vendor.notice')
@@ -94,22 +101,27 @@ $base_cur = base_currency();
                                 <em class="fas fa-info-circle fs-11" data-toggle="tooltip" data-placement="right" title="Combined calculation of all transactions in base currency."></em></span> 
                             </span>
                             </div>
+                             <div class="token-balance-text">
+                
+                                <span class="lead">{{ to_num($trnxs->currency->bnb, 'auto', ',') }} 
+                                <span>{{ strtoupper('bnb') }} 
+                                
+                            </span>
+                            </div>
+                            
                         </div>
                         <div class="tab-content">
                             <div class="tab-pane fade show active" id="view-crypto">
                                 <div class="token-balance token-balance-s2">
                                     <ul class="token-balance-list">
-                                        <li class="token-balance-sub">
-                                            <span class="lead">{{ to_num($trnxs->currency->xrp, 'auto') }}</span>
-                                            <span class="sub">XRP</span>
-                                        </li>
+                                        
                                         <li class="token-balance-sub">
                                             <span class="lead">{{ to_num($trnxs->currency->btc, 'auto') }}</span>
                                             <span class="sub">BTC</span>
                                         </li>
                                         <li class="token-balance-sub">
-                                            <span class="lead">{{ to_num($trnxs->currency->bnb, 'auto') }}</span>
-                                            <span class="sub">BNB</span>
+                                            <span class="lead">{{ to_num($trnxs->currency->xrp, 'auto') }}</span>
+                                            <span class="sub">XRP</span>
                                         </li>
                                         <li class="token-balance-sub">
                                             <span class="lead">{{ to_num($trnxs->currency->trx, 'auto') }}</span>
