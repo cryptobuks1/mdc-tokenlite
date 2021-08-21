@@ -27,6 +27,9 @@ use App\Models\MatrixDownline;
 use DB;
 use App\Models\TokenStaked;
 
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\TransactionExport;
+
 class TransactionController extends Controller
 {
     /**
@@ -560,5 +563,11 @@ class TransactionController extends Controller
 
 
  }
+
+  public function exportTransaction(){
+         
+         return Excel::download(new TransactionExport, 'transactions.xlsx');
+
+    }
 
 }

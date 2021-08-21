@@ -22,6 +22,8 @@
                                             <span>Add <span class="d-none d-md-inline-block">User</span></span>
                                         </a>
                                     </li>
+                                     <li><a class="btn btn-auto btn-info btn-outline btn-sm" href="{{ route('admin.users.list.export') }}">Export CSV</a></li>
+                                    
                                 </ul>
                             </div>
                         </div>
@@ -34,6 +36,7 @@
                                     <em class="fas fa-plus-circle"> </em><span>Add <span class="d-none d-md-inline-block">User</span></span>
                                 </a>
                             </li>
+                             <li><a class="btn btn-auto btn-success btn-outline btn-sm" href="{{ route('admin.users.list.export') }}"> <em class="fas fa-file-pdf">  </em> Export CSV</a></li>
                         </ul>
                     </div>
                 </div>

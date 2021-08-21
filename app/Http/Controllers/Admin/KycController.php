@@ -15,6 +15,8 @@ use App\Models\Setting;
 use Illuminate\Http\Request;
 use App\Notifications\KycStatus;
 use App\Http\Controllers\Controller;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\KYCExport;
 
 class KycController extends Controller
 {
@@ -276,5 +278,12 @@ class KycController extends Controller
             return response()->json($ret);
         }
         return back()->with([$ret['msg'] => $ret['message']]);
+    }
+
+
+    public function exportKYC(){
+         
+         return Excel::download(new KYCExport, 'kyc-list.xlsx');
+
     }
 }

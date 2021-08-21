@@ -4,6 +4,7 @@
     p {
         color:#101a2d !important;
     }
+
     </style>
 @section('content')
 <div class="page-content">
@@ -21,6 +22,7 @@
                                     <em class="fas fa-plus-circle"></em><span>Add <span class="d-none d-sm-inline-block">Tokens</span></span>
                                 </a>
                             </li>
+                            <li><a class="btn btn-auto btn-info btn-outline btn-sm" href="{{ route('admin.transactions.list.export') }}"> <em class="ti ti-files"></em> Export CSV</a></li>
                         </ul>
                     </div>
                 </div>
