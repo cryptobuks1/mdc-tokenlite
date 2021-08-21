@@ -25,8 +25,8 @@ class TransactionExport implements FromQuery , WithHeadings ,WithMapping ,Should
 
 
     public function map($trnx): array {
-        $base_amount =  $trnx->base_amount ;
-        $amount =  $trnx->amount;
+        $base_amount =  $trnx->base_amount . ' ' .strtoupper($trnx->base_currency);
+        $amount =  $trnx->amount . ' '. strtoupper($trnx->currency);
         if($trnx->tnx_type=='referral'||$trnx->tnx_type=='bonus') {
              $base_amount = '~' ;
              $amount =  '~';
@@ -50,8 +50,8 @@ class TransactionExport implements FromQuery , WithHeadings ,WithMapping ,Should
             _date($trnx->tnx_time),
              $trnx->tnx_type,
             (starts_with($trnx->total_tokens, '-') ? '' : '+').$trnx->total_tokens  .' ' .token('symbol'),
-            $amount .' ' .strtoupper($trnx->currency),
-             $base_amount . ' ' .strtoupper($trnx->base_currency),
+            $amount ,
+             $base_amount ,
             $payFrom,
            
             $trnx->status
