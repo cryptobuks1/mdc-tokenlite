@@ -20,6 +20,7 @@
         "laravel/framework": "5.7.*",
         "laravel/socialite": "^4.0",
         "laravel/tinker": "^1.0",
+        "maatwebsite/excel": "^3.1",
         "paypal/rest-api-sdk-php": "*",
         "pragmarx/google2fa": "^5.0",
         "softnio/laravel-installer": "^1.0",

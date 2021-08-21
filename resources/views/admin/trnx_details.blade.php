@@ -12,6 +12,7 @@
                 </div>
                 <div class="gaps-1-5x"></div>
                 <div class="data-details d-md-flex">
+                    
                     <div class="fake-class">
                         <span class="data-details-title">Transaction Date</span>
                         <span class="data-details-info">{{ _date($trnx->tnx_time) }}</span>

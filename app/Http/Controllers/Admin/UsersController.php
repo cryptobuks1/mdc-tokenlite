@@ -10,6 +10,7 @@ namespace App\Http\Controllers\Admin;
  */
 use Mail;
 use Validator;
+use App\Exports\UsersExport;
 use App\Models\KYC;
 use App\Models\User;
 use App\Models\UserMeta;
@@ -22,6 +23,7 @@ use App\Notifications\ConfirmEmail;
 use App\Http\Controllers\Controller;
 use App\Notifications\PasswordResetByAdmin;
 use Illuminate\Support\Facades\Hash;
+use Maatwebsite\Excel\Facades\Excel;
 
 class UsersController extends Controller
 {
@@ -35,6 +37,7 @@ class UsersController extends Controller
      */
     public function index(Request $request, $role = '')
     {
+
         $role_data  = '';
         $per_page   = gmvl('user_per_page', 10);
         $order_by   = (gmvl('user_order_by', 'id')=='token') ? 'tokenBalance' : gmvl('user_order_by', 'id');
@@ -431,6 +434,17 @@ class UsersController extends Controller
             return response()->json($ret);
         }
         return back()->with([$ret['msg'] => $ret['message']]);
+    }
+
+    /**
+    * @return \Illuminate\Support\Collection
+    */
+
+    public function exportUser(){
+
+         
+         return Excel::download(new UsersExport, 'users.xlsx');
+
     }
 
 }

@@ -19,6 +19,11 @@
                                     <em class="ti ti-settings"></em><span>KYC <span class="d-none d-md-inline-block">Form</span> Settings</span>
                                 </a>
                             </li>
+                            <li>
+                                <a href="{{ route('admin.kyclist.export') }}"  class="btn btn-auto btn-success btn-outline btn-sm">
+                                    <em class="ti ti-files"></em><span>KYC <span class="d-none d-md-inline-block">Export</span> List</span>
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </div>

@@ -179,6 +179,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         // Custom Service Provider or Override Provider
         App\Providers\EMailServiceProvider::class,
+        Maatwebsite\Excel\ExcelServiceProvider::class,
     ],
 
     /*
@@ -230,7 +231,8 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'UserPanel' => App\Helpers\UserPanel::class,
         'IcoData' => App\Helpers\DemoData::class,
-        'QRCode' => App\Helpers\QRCode::class
+        'QRCode' => App\Helpers\QRCode::class,
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class
 
     ],
 

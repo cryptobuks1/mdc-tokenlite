@@ -116,16 +116,21 @@ Route::prefix('admin')->middleware(['auth', 'admin', 'g2fa', 'ico'])->name('admi
     Route::get('/stages/{id}', 'Admin\IcoController@edit_stage')->middleware('ico')->name('stages.edit');
     Route::get('/users/{role?}', 'Admin\UsersController@index')->middleware('ico')->name('users'); //v1.1.0
     Route::get('/users/wallet/change-request', 'Admin\UsersController@wallet_change_request')->middleware('ico')->name('users.wallet.change');
+
+
+     Route::get('/users/list/export', 'Admin\UsersController@exportUser')->name('users.list.export');
+
+     Route::get('/kyc-list/export', 'Admin\KycController@exportKYC')->name('kyclist.export');
     Route::get('/kyc-list/{status?}', 'Admin\KycController@index')->middleware('ico')->name('kycs'); //v1.1.0
     Route::get('/kyc-list/documents/{file}/{doc}', 'Admin\KycController@get_documents')->middleware('ico')->name('kycs.file');
     Route::get('/transactions/view/{id}', 'Admin\TransactionController@show')->name('transactions.view');
     Route::get('/users/{id?}/{type?}', 'Admin\UsersController@show')->name('users.view');
     Route::get('/kyc/view/{id}/{type}', 'Admin\KycController@show')->name('kyc.view');
     Route::get('/pages/{slug}', 'Admin\PageController@edit')->middleware('ico')->name('pages.edit');
-    Route::get('/export/{table?}/{format?}', 'ExportController@export')->middleware(['ico', 'super_admin'])->name('export'); // v1.1.0
+
     Route::get('/languages', 'Admin\LanguageController@index')->middleware(['ico'])->name('lang.manage'); // v1.1.3
     Route::get('/languages/translate/{code}', 'Admin\LanguageController@translator')->middleware(['ico'])->name('lang.translate'); // v1.1.3
-
+ Route::get('/transactions/list/export', 'Admin\TransactionController@exportTransaction')->name('transactions.list.export');
     /* Admin Ajax Route */
     Route::name('ajax.')->prefix('ajax')->group(function () {
         Route::post('/users/view', 'Admin\UsersController@status')->name('users.view');
@@ -163,6 +168,8 @@ Route::prefix('admin')->middleware(['auth', 'admin', 'g2fa', 'ico'])->name('admi
         Route::post('/settings/email/template/update', 'Admin\EmailSettingController@update_template')->middleware(['super_admin'])->name('settings.email.template.update');
         Route::post('/languages', 'Admin\LanguageController@language_action')->middleware(['ico'])->name('lang.action'); // v1.1.3
         Route::post('/languages/translate', 'Admin\LanguageController@language_action')->middleware(['ico'])->name('lang.translate.action'); // v1.1.3
+
+       
     });
 
     //Clear Cache facade value:
