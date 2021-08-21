@@ -100,16 +100,20 @@ $base_cur = base_currency();
                                 <div class="token-balance token-balance-s2">
                                     <ul class="token-balance-list">
                                         <li class="token-balance-sub">
-                                            <span class="lead">{{ to_num($trnxs->currency->eth, 'auto') }}</span>
-                                            <span class="sub">ETH</span>
+                                            <span class="lead">{{ to_num($trnxs->currency->xrp, 'auto') }}</span>
+                                            <span class="sub">XRP</span>
                                         </li>
                                         <li class="token-balance-sub">
                                             <span class="lead">{{ to_num($trnxs->currency->btc, 'auto') }}</span>
                                             <span class="sub">BTC</span>
                                         </li>
                                         <li class="token-balance-sub">
-                                            <span class="lead">{{ to_num($trnxs->currency->ltc, 'auto') }}</span>
-                                            <span class="sub">LTC</span>
+                                            <span class="lead">{{ to_num($trnxs->currency->bnb, 'auto') }}</span>
+                                            <span class="sub">BNB</span>
+                                        </li>
+                                        <li class="token-balance-sub">
+                                            <span class="lead">{{ to_num($trnxs->currency->trx, 'auto') }}</span>
+                                            <span class="sub">TRX</span>
                                         </li>
                                     </ul>
                                 </div>
