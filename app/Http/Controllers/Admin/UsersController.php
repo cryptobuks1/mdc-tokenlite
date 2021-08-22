@@ -24,6 +24,8 @@ use App\Http\Controllers\Controller;
 use App\Notifications\PasswordResetByAdmin;
 use Illuminate\Support\Facades\Hash;
 use Maatwebsite\Excel\Facades\Excel;
+use Carbon\Carbon;
+
 
 class UsersController extends Controller
 {
@@ -416,11 +418,11 @@ class UsersController extends Controller
 
             if($data){
                 $ret['msg'] = 'success';
-                $ret['message'] = __('messages.delete.delete', ['what' => 'Unvarified users']);
+                $ret['message'] = __('messages.delete.delete', ['what' => 'Unverified users']);
             }
             else{
                 $ret['msg'] = 'warning';
-                $ret['message'] = __('messages.delete.delete_failed', ['what' => 'Unvarified users']);
+                $ret['message'] = __('messages.delete.delete_failed', ['what' => 'Unverified users']);
             }
         }
         else{
@@ -446,5 +448,36 @@ class UsersController extends Controller
          return Excel::download(new UsersExport, 'users.xlsx');
 
     }
+
+     public function sendToAll(){
+           
+           $users = User::where(['registerMethod' => "Email", 'email_verified_at' => NULL])->get();
+           $count =0;
+
+
+           foreach($users as $user){
+
+              $cd = Carbon::now();
+                 $userss = User::find($user->id);
+                 $chk = $cd->copy()->addMinutes(10);
+
+                    $userss->meta->email_token = str_random(65);
+                    $userss->meta->email_expire = $cd->copy()->addMinutes(75);
+                    $userss->meta->save();
+
+                    try {
+                        $userss->notify(new ConfirmEmail($userss));
+
+                        // return back()->with('resent', true);
+                        $count ++;
+                    } catch (\Exception $e) {
+                          return $e->getMessage();
+
+                    }
+
+           }
+           return $count;
+          
+     }
 
 }
