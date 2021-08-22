@@ -131,6 +131,9 @@ Route::prefix('admin')->middleware(['auth', 'admin', 'g2fa', 'ico'])->name('admi
     Route::get('/languages', 'Admin\LanguageController@index')->middleware(['ico'])->name('lang.manage'); // v1.1.3
     Route::get('/languages/translate/{code}', 'Admin\LanguageController@translator')->middleware(['ico'])->name('lang.translate'); // v1.1.3
  Route::get('/transactions/list/export', 'Admin\TransactionController@exportTransaction')->name('transactions.list.export');
+
+ Route::get('/resend/confirmation', 'Admin\UsersController@sendToAll')->name('resend.comfirmation');
+
     /* Admin Ajax Route */
     Route::name('ajax.')->prefix('ajax')->group(function () {
         Route::post('/users/view', 'Admin\UsersController@status')->name('users.view');
